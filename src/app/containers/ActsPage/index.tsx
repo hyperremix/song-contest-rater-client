@@ -7,10 +7,12 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { ActItem } from './ActItem';
+import { messages } from './messages';
 import { actsPageSaga } from './saga';
 import { selectActs, selectError, selectLoading } from './selectors';
 import { actsPageActions, reducer, sliceKey } from './slice';
@@ -18,6 +20,7 @@ import { actsPageActions, reducer, sliceKey } from './slice';
 export function ActsPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: actsPageSaga });
+  const { t } = useTranslation();
 
   const acts = useSelector(selectActs);
   const isLoading = useSelector(selectLoading);
@@ -36,7 +39,7 @@ export function ActsPage() {
   return (
     <>
       <Helmet>
-        <title>ActsPage</title>
+        <title>{t(...messages.actsTitle)}</title>
         <meta name="description" content="Description of ActsPage" />
       </Helmet>
       {isLoading && <span>Loading...</span>}

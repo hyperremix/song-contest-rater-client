@@ -5,5 +5,8 @@
   },
   "translations": {
     "someThing": "default value"
+  },
+  "acts": {
+    "title": "Acts"
   }
 }

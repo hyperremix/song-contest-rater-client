@@ -12,26 +12,31 @@ import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global-styles';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import { PageWrapper } from './components/PageWrapper';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { HomePage } from './containers/HomePage/Loadable';
+import { NavBar } from './containers/NavBar';
 
 export function App() {
   const { i18n } = useTranslation();
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
+        titleTemplate="%s - Song Contest Rater"
+        defaultTitle="Song Contest Rater"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="A React Boilerplate application" />
+        <meta name="description" content="A song contest rater application" />
       </Helmet>
 
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/acts" component={ActsPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <NavBar />
+      <PageWrapper>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/acts" component={ActsPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </PageWrapper>
       <GlobalStyle />
     </BrowserRouter>
   );

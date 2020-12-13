@@ -7,6 +7,7 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
+  actsTitle: _t(translations.acts.title, 'Acts'),
   artistNameLabel: _t(translations.actItem.artistName, 'Artist'),
   songNameLabel: _t(translations.actItem.songLabel, 'Song'),
 };
