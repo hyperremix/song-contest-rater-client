@@ -11,6 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { LoadingIndicator } from '../../components/LoadingIndicator';
+import { ApiErrorText } from '../ApiErrorText';
 import { ActItem } from './ActItem';
 import { messages } from './messages';
 import { actsPageSaga } from './saga';
@@ -42,7 +44,7 @@ export function ActsPage() {
         <title>{t(...messages.actsTitle)}</title>
         <meta name="description" content="Description of ActsPage" />
       </Helmet>
-      {isLoading && <span>Loading...</span>}
+      {isLoading && <LoadingIndicator />}
       {acts?.length ? (
         <List>
           {acts.map(act => (
@@ -54,12 +56,10 @@ export function ActsPage() {
           ))}
         </List>
       ) : error ? (
-        <ErrorText>{error}</ErrorText>
+        <ApiErrorText error={error} />
       ) : null}
     </>
   );
 }
 
 const List = styled.div``;
-
-const ErrorText = styled.span``;

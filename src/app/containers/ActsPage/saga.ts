@@ -6,7 +6,7 @@ import { actsPageActions } from './slice';
 export function* getActs() {
   try {
     const acts = yield call(request, `${process.env.REACT_APP_API_URL}/acts`);
-    if (!acts?.length) {
+    if (acts?.length) {
       yield put(actsPageActions.actsError(ApiError.EMPTY_LIST));
       return;
     }

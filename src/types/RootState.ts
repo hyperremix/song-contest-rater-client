@@ -1,4 +1,5 @@
 import { ActsPageState } from 'app/containers/ActsPage/types';
+import { ThemeState } from 'styles/theme/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -6,6 +7,7 @@ import { ActsPageState } from 'app/containers/ActsPage/types';
   You have to declare them here manually
 */
 export interface RootState {
+  theme?: ThemeState;
   actsPage?: ActsPageState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

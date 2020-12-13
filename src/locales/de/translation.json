@@ -8,5 +8,10 @@
   },
   "acts": {
     "title": "Auftritte"
+  },
+  "apiError": {
+    "notFound": "Das wonach du gesucht hast, wurde nicht gefunden.",
+    "emptyList": "Es gibt noch keine Einträge von diesem Typ.",
+    "responseError": "Etwas ist schief gelaufen."
   }
 }

@@ -32,6 +32,10 @@ export function ActItem({ artistName, songName }: Props) {
 
 const Info = styled.div``;
 
-const ArtistName = styled.div``;
+const ArtistName = styled.div`
+  color: ${p => p.theme.text};
+`;
 
-const SongName = styled.div``;
+const SongName = styled.div`
+  color: ${p => p.theme.text};
+`;

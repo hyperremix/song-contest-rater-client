@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 import 'sanitize.css/sanitize.css';
 import * as serviceWorker from 'serviceWorker';
 import { configureAppStore } from 'store/configureStore';
+import { ThemeProvider } from 'styles/theme';
 // Initialize languages
 import './locales/i18n';
 
@@ -25,11 +26,13 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <HelmetProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </HelmetProvider>
+    <ThemeProvider>
+      <HelmetProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </HelmetProvider>
+    </ThemeProvider>
   </Provider>,
   MOUNT_NODE,
 );
