@@ -1,7 +1,7 @@
 {
   "actItem": {
-    "artistName": "Artist",
-    "songLabel": "Song"
+    "artistName": "Künstler(in)",
+    "songLabel": "Lied"
   },
   "translations": {
     "someThing": "default value"

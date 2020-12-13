@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -48,6 +48,7 @@
     }
   },
   "dependencies": {
+    "@hyperremix/song-contest-rater-model": "1.0.1",
     "@reduxjs/toolkit": "1.4.0",
     "fontfaceobserver": "2.1.0",
     "i18next": "19.7.0",
@@ -85,6 +86,7 @@
     "@types/webpack-env": "1.15.2",
     "chalk": "4.1.0",
     "cross-env": "7.0.2",
+    "dotenv": "8.2.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react-hooks": "4.1.0",
