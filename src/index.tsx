@@ -6,6 +6,7 @@
  */
 
 // Import root app
+import { CssBaseline } from '@material-ui/core';
 import { App } from 'app';
 import * as React from 'react';
 import 'react-app-polyfill/ie11';
@@ -29,6 +30,7 @@ ReactDOM.render(
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
+          <CssBaseline />
           <App />
         </React.StrictMode>
       </HelmetProvider>

@@ -4,37 +4,53 @@
  *
  */
 
+import {
+  AppBar,
+  Button,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import { StyleConstants } from '../../../styles';
-import { PageWrapper } from '../../components/PageWrapper';
-import { Logo } from './Logo';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 export function NavBar() {
+  const classes = useStyles();
+
   return (
     <>
-      <Wrapper>
-        <PageWrapper>
-          <Logo />
-        </PageWrapper>
-      </Wrapper>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Song Contest Rater
+          </Typography>
+          <Button color="inherit">
+            <AccountCircle />
+          </Button>
+        </Toolbar>
+      </AppBar>
     </>
   );
 }
-
-const Wrapper = styled.header`
-  box-shadow: 0 1px 0 0 ${p => p.theme.borderLight};
-  height: ${StyleConstants.NAV_BAR_HEIGHT};
-  display: flex;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: ${p => p.theme.background};
-  z-index: 2;
-
-  ${PageWrapper} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-`;

@@ -7,5 +7,8 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-  actsTitle: _t(translations.acts.title, 'Acts'),
+  pageNotFoundError: _t(
+    translations.generalErrors.pageNotFound,
+    'Page Not Found',
+  ),
 };

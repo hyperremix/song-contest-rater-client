@@ -1,5 +1,5 @@
+import { Theme } from '@material-ui/core';
 import 'styled-components';
-import { Theme } from './themes';
 
 /* This is the suggested way of declaring theme types */
 declare module 'styled-components' {

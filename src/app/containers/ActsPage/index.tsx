@@ -4,15 +4,14 @@
  *
  */
 
+import { CircularProgress, Grid, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { LoadingIndicator } from '../../components/LoadingIndicator';
-import { ApiErrorText } from '../ApiErrorText';
+import { ApiErrorAlert } from '../ApiErrorAlert';
 import { ActItem } from './ActItem';
 import { messages } from './messages';
 import { actsPageSaga } from './saga';
@@ -44,22 +43,21 @@ export function ActsPage() {
         <title>{t(...messages.actsTitle)}</title>
         <meta name="description" content="Description of ActsPage" />
       </Helmet>
-      {isLoading && <LoadingIndicator />}
-      {acts?.length ? (
-        <List>
-          {acts.map(act => (
+      <Typography variant="h2">{t(...messages.actsTitle)}</Typography>
+      <Grid container direction="column" justify="center" alignItems="stretch">
+        {isLoading && <CircularProgress />}
+        {acts?.length ? (
+          acts.map(act => (
             <ActItem
               key={act.id}
               artistName={act.artistName}
               songName={act.songName}
             />
-          ))}
-        </List>
-      ) : error ? (
-        <ApiErrorText error={error} />
-      ) : null}
+          ))
+        ) : error ? (
+          <ApiErrorAlert error={error} />
+        ) : null}
+      </Grid>
     </>
   );
 }
-
-const List = styled.div``;

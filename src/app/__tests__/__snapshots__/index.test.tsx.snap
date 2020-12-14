@@ -17,9 +17,15 @@ exports[`<App /> should render and match the snapshot 1`] = `
       content="A song contest rater application"
       name="description"
     />
+    <meta
+      content="minimum-scale=1, initial-scale=1, width=device-width"
+      name="viewport"
+    />
   </Helmet>
   <NavBar />
-  <PageWrapper>
+  <WithStyles(ForwardRef(Container))
+    maxWidth="md"
+  >
     <Switch>
       <Route
         component={[Function]}
@@ -35,7 +41,6 @@ exports[`<App /> should render and match the snapshot 1`] = `
         component={[Function]}
       />
     </Switch>
-  </PageWrapper>
-  <Memo(GlobalStyleComponent) />
+  </WithStyles(ForwardRef(Container))>
 </BrowserRouter>
 `;

@@ -3,39 +3,50 @@
  * ActItem
  *
  */
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import styled from 'styled-components/macro';
-import { messages } from './messages';
 
 interface Props {
   artistName: string;
   songName: string;
 }
 
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+  },
+  media: {
+    minWidth: 140,
+  },
+});
+
 export function ActItem({ artistName, songName }: Props) {
-  const { t } = useTranslation();
+  const classes = useStyles();
 
   return (
-    <Info>
-      <ArtistName>
-        <div>{t(...messages.artistNameLabel)}</div>
-        <div>{artistName}</div>
-      </ArtistName>
-      <SongName>
-        <div>{t(...messages.songNameLabel)}</div>
-        <div>{songName}</div>
-      </SongName>
-    </Info>
+    <>
+      <Box m={1}>
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.media}
+            image="https://i2.wp.com/escxtra.com/wp-content/uploads/mans-melkweg.jpeg?resize=780%2C405&ssl=1"
+            title={artistName}
+          />
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {songName}
+            </Typography>
+            <Typography>{artistName}</Typography>
+          </CardContent>
+        </Card>
+      </Box>
+    </>
   );
 }
-
-const Info = styled.div``;
-
-const ArtistName = styled.div`
-  color: ${p => p.theme.text};
-`;
-
-const SongName = styled.div`
-  color: ${p => p.theme.text};
-`;
