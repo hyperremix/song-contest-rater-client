@@ -57,6 +57,7 @@
     "i18next": "19.7.0",
     "i18next-browser-languagedetector": "6.0.1",
     "i18next-scanner": "2.11.0",
+    "material-ui-flags": "1.2.4",
     "react": "16.13.1",
     "react-app-polyfill": "1.0.6",
     "react-dom": "16.13.1",
