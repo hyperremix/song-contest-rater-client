@@ -8,7 +8,6 @@ import {
   AppBar,
   Button,
   Grid,
-  IconButton,
   makeStyles,
   Menu,
   MenuItem,
@@ -17,7 +16,6 @@ import {
 } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
 import { LanguagePicker } from '../LanguagePicker';
 import { ThemePicker } from '../ThemePicker';
@@ -25,9 +23,6 @@ import { ThemePicker } from '../ThemePicker';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -51,14 +46,6 @@ export function NavBar() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Song Contest Rater
           </Typography>
