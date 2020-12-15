@@ -3,6 +3,7 @@
  * ActItem
  *
  */
+import { Act } from '@hyperremix/song-contest-rater-model';
 import {
   Box,
   Card,
@@ -14,8 +15,7 @@ import {
 import * as React from 'react';
 
 interface Props {
-  artistName: string;
-  songName: string;
+  act: Act;
 }
 
 const useStyles = makeStyles({
@@ -27,8 +27,12 @@ const useStyles = makeStyles({
   },
 });
 
-export function ActItem({ artistName, songName }: Props) {
+export function ActItem({ act }: Props) {
   const classes = useStyles();
+
+  const image = act.imageUrl
+    ? act.imageUrl
+    : `${process.env.PUBLIC_URL}/logo192.png`;
 
   return (
     <>
@@ -36,14 +40,14 @@ export function ActItem({ artistName, songName }: Props) {
         <Card className={classes.root}>
           <CardMedia
             className={classes.media}
-            image="https://i2.wp.com/escxtra.com/wp-content/uploads/mans-melkweg.jpeg?resize=780%2C405&ssl=1"
-            title={artistName}
+            image={image}
+            title={act.artistName}
           />
           <CardContent>
             <Typography variant="h5" component="h2">
-              {songName}
+              {act.songName}
             </Typography>
-            <Typography>{artistName}</Typography>
+            <Typography>{act.artistName}</Typography>
           </CardContent>
         </Card>
       </Box>

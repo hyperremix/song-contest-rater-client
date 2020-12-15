@@ -1289,10 +1289,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hyperremix/song-contest-rater-model@1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.0.1/453297b34f4cd7aca4844a43bfaf49b2bcfa376d3860155f4308c34c083ec6bf#99adfb4eab0bac01d8deda57d189150a0bf3f773"
-  integrity sha512-b+aCkwa7NsWKnu1wMsh/pJUMwCypEv3MyJ4+0RkPNk6Ai/CyIZnVtT+6Iq5FM2S2Vo9jRpBqGrolFEYcOujh3Q==
+"@hyperremix/song-contest-rater-model@^1.0.1":
+  version "1.0.2"
+  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.0.2/12ad044b98dc613a4b1c8041fa7c744c71cc759ab163c21b434afd2b36dd4911#ee0ffcfb39e706c1bc076e3b0a25e4cfa8867087"
+  integrity sha512-cmqZU17/5EyJGnt2e53mer5hBlpuncCt98M4AEkRLtUjb7Bj2V5Bt3rJa3C1HpePT+RLoUxvmC0bns91zpOakA==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

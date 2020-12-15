@@ -47,13 +47,7 @@ export function ActsPage() {
       <Grid container direction="column" justify="center" alignItems="stretch">
         {isLoading && <CircularProgress />}
         {acts?.length ? (
-          acts.map(act => (
-            <ActItem
-              key={act.id}
-              artistName={act.artistName}
-              songName={act.songName}
-            />
-          ))
+          acts.map(act => <ActItem key={act.id} act={act} />)
         ) : error ? (
           <ApiErrorAlert error={error} />
         ) : null}
