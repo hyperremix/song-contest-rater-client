@@ -16,5 +16,8 @@
   },
   "generalErrors": {
     "pageNotFound": "Die Seite wurde nicht gefunden"
+  },
+  "navBar": {
+    "lightSwitch": "Lichtschalter"
   }
 }

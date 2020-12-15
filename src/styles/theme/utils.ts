@@ -1,17 +1,15 @@
-import { ThemeKeyType } from './types';
-
 /* istanbul ignore next line */
-export const isSystemDark = window?.matchMedia
+export const isSystemDark: boolean = window?.matchMedia
   ? window.matchMedia('(prefers-color-scheme: dark)')?.matches
-  : undefined;
+  : true;
 
-export function saveTheme(theme: ThemeKeyType) {
-  window.localStorage && localStorage.setItem('selectedTheme', theme);
+export function saveTheme(isLightTheme: boolean): void {
+  window.localStorage &&
+    localStorage.setItem('isLightTheme', String(isLightTheme));
 }
 
 /* istanbul ignore next line */
-export function getThemeFromStorage(): ThemeKeyType | null {
-  return window.localStorage
-    ? (localStorage.getItem('selectedTheme') as ThemeKeyType) || null
-    : null;
+export function getThemeFromStorage(): boolean | null {
+  const value = window.localStorage && localStorage.getItem('isLightTheme');
+  return value ? value === 'true' : null;
 }

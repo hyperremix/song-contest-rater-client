@@ -1,19 +1,19 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../types/RootState';
 import { themes } from './themes';
-import { ThemeKeyType, ThemeState } from './types';
+import { ThemeState } from './types';
 import { getThemeFromStorage, isSystemDark } from './utils';
 
 export const initialState: ThemeState = {
-  selected: getThemeFromStorage() || 'system',
+  isLightTheme: getThemeFromStorage() ?? !isSystemDark,
 };
 
 const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    changeTheme(state, action: PayloadAction<ThemeKeyType>) {
-      state.selected = action.payload;
+    changeTheme(state, action: PayloadAction<boolean>) {
+      state.isLightTheme = action.payload;
     },
   },
 });
@@ -21,16 +21,13 @@ const themeSlice = createSlice({
 export const selectTheme = createSelector(
   [(state: RootState) => state.theme || initialState],
   theme => {
-    if (theme.selected === 'system') {
-      return isSystemDark ? themes.dark : themes.light;
-    }
-    return themes[theme.selected];
+    return theme.isLightTheme ? themes.light : themes.dark;
   },
 );
 
 export const selectThemeKey = createSelector(
   [(state: RootState) => state.theme || initialState],
-  theme => theme.selected,
+  theme => theme.isLightTheme,
 );
 
 export const { changeTheme } = themeSlice.actions;

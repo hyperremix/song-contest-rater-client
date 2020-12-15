@@ -29,10 +29,8 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider>
       <HelmetProvider>
-        <React.StrictMode>
-          <CssBaseline />
-          <App />
-        </React.StrictMode>
+        <CssBaseline />
+        <App />
       </HelmetProvider>
     </ThemeProvider>
   </Provider>,

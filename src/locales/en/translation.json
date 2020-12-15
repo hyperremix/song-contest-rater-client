@@ -16,5 +16,8 @@
   },
   "generalErrors": {
     "pageNotFound": "Page Not Found"
+  },
+  "navBar": {
+    "lightSwitch": "Light Switch"
   }
 }
