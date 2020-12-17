@@ -19,5 +19,20 @@
   },
   "navBar": {
     "lightSwitch": "Light Switch"
+  },
+  "competitionList": {
+    "title": "Competitions",
+    "nextHeader": "Next",
+    "ongoingHeader": "Ongoing",
+    "upcomingHeader": "Upcoming",
+    "previousHeader": "Previous"
+  },
+  "smartDateTime": {
+    "at": "at",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "today": "Today",
+    "last": "Last",
+    "on": "On"
   }
 }

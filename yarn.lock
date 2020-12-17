@@ -1289,10 +1289,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hyperremix/song-contest-rater-model@^1.0.1":
-  version "1.0.2"
-  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.0.2/12ad044b98dc613a4b1c8041fa7c744c71cc759ab163c21b434afd2b36dd4911#ee0ffcfb39e706c1bc076e3b0a25e4cfa8867087"
-  integrity sha512-cmqZU17/5EyJGnt2e53mer5hBlpuncCt98M4AEkRLtUjb7Bj2V5Bt3rJa3C1HpePT+RLoUxvmC0bns91zpOakA==
+"@hyperremix/song-contest-rater-model@^1.1.1":
+  version "1.1.1"
+  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.1.1/5a315eb33fb122d937f20422f919b25fe3f5f3f43241d45646abcddd521b9a7a#2603ef3953080cf3d42b4b1e175208c7129dd178"
+  integrity sha512-t4egnkKp1V8RIr8ki6HCnP9CXHHQgfJ9Mx1cibQSeSxBnqrE9AfGBuhzGGPsVVIkC/lcWmZsmcsZqiJ+rGcKwg==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -9109,6 +9109,11 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
+moment@2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -11167,6 +11172,11 @@ react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-i
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-moment@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-1.0.0.tgz#aedac867cd08739065799de9452c898d954ba6d7"
+  integrity sha512-J4iIiwUT4oZcL7cp2U7naQKbQtqvmzGXXBMg/DLj+Pi7n9EW0VhBRx/1aJ1Tp2poCqTCAPoadLEoUIkReGnNNg==
 
 react-redux@7.2.1:
   version "7.2.1"

@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
-import { HomePage } from './containers/HomePage/Loadable';
+import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
 import { NavBar } from './containers/NavBar';
 
 export function App() {
@@ -36,7 +36,7 @@ export function App() {
       <NavBar />
       <Container maxWidth="md">
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={CompetitionListPage} />
           <Route exact path="/acts" component={ActsPage} />
           <Route component={NotFoundPage} />
         </Switch>

@@ -19,5 +19,20 @@
   },
   "navBar": {
     "lightSwitch": "Lichtschalter"
+  },
+  "competitionList": {
+    "title": "Wettbewerbe",
+    "nextHeader": "Als Nächstes",
+    "ongoingHeader": "Laufend",
+    "upcomingHeader": "Kommende",
+    "previousHeader": "Vorherige"
+  },
+  "smartDateTime": {
+    "at": "um",
+    "yesterday": "Gestern",
+    "tomorrow": "Morgen",
+    "today": "Heute",
+    "last": "Letzen",
+    "on": "Am"
   }
 }
