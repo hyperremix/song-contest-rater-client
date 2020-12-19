@@ -34,5 +34,19 @@
     "today": "Heute",
     "last": "Letzen",
     "on": "Am"
+  },
+  "competitionDescriptions": {
+    "Final": "Finale",
+    "Semifinal 1": "Halbfinale 1",
+    "Semifinal 2": "Halbfinale 2",
+    "Semifinal 3": "Halbfinale 3",
+    "Semifinal 4": "Halbfinale 4",
+    "Second Chance": "Zweite Chance"
+  },
+  "cities": {
+    "Stockholm": "Stockholm"
+  },
+  "countries": {
+    "Sweden": "Schweden"
   }
 }

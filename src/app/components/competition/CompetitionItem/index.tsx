@@ -7,6 +7,7 @@ import { Competition } from '@hyperremix/song-contest-rater-model';
 import { Box, Card, Grid, makeStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SmartDateTime } from '../../general/SmartDateTime';
 
 interface Props {
@@ -46,6 +47,7 @@ const useStyles = makeStyles(() => ({
 
 export function CompetitionItem({ competition }: Props) {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const [elevation, setElevation] = useState<number>(1);
 
@@ -85,7 +87,9 @@ export function CompetitionItem({ competition }: Props) {
                 flexDirection="column"
                 justifyContent="center"
               >
-                <Typography variant="h3">{competition.description}</Typography>
+                <Typography variant="h3">
+                  {t(`competitionDescriptions.${competition.description}`)}
+                </Typography>
               </Box>
               <Box>
                 <Grid
@@ -108,9 +112,11 @@ export function CompetitionItem({ competition }: Props) {
                       justify="flex-end"
                       alignItems="center"
                     >
-                      <Typography>{competition.cityName}</Typography>
+                      <Typography>
+                        {t(`cities.${competition.cityName}`)}
+                      </Typography>
                       <Typography variant="h5" className={classes.country}>
-                        {competition.countryName}
+                        {t(`countries.${competition.countryName}`)}
                       </Typography>
                     </Grid>
                   </Box>

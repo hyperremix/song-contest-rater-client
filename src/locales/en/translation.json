@@ -34,5 +34,19 @@
     "today": "Today",
     "last": "Last",
     "on": "On"
+  },
+  "competitionDescriptions": {
+    "Final": "Final",
+    "Semifinal 1": "Semifinal 1",
+    "Semifinal 2": "Semifinal 2",
+    "Semifinal 3": "Semifinal 3",
+    "Semifinal 4": "Semifinal 4",
+    "Second Chance": "Second Chance"
+  },
+  "cities": {
+    "Stockholm": "Stockholm"
+  },
+  "countries": {
+    "Sweden": "Sweden"
   }
 }
