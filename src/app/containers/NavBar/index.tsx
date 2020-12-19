@@ -7,7 +7,6 @@
 import {
   AppBar,
   Button,
-  Grid,
   makeStyles,
   Menu,
   MenuItem,
@@ -76,19 +75,12 @@ export function NavBar() {
             onClose={handleClose}
             getContentAnchorEl={null}
           >
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="stretch"
-            >
-              <MenuItem disableRipple>
-                <ThemePicker />
-              </MenuItem>
-              <MenuItem disableRipple>
-                <LanguagePicker />
-              </MenuItem>
-            </Grid>
+            <MenuItem disableRipple>
+              <ThemePicker />
+            </MenuItem>
+            <MenuItem disableRipple>
+              <LanguagePicker />
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

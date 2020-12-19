@@ -4,7 +4,7 @@
  *
  */
 
-import { FormControlLabel, Grid, makeStyles, Radio } from '@material-ui/core';
+import { FormControlLabel, makeStyles, Radio } from '@material-ui/core';
 import { IconFlagDE, IconFlagUK } from 'material-ui-flags';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,34 +27,32 @@ export function LanguagePicker() {
 
   return (
     <>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <FormControlLabel
-          value="end"
-          control={
-            <Radio
-              id="en"
-              name="language"
-              onChange={handleLanguageChange}
-              value="en"
-              checked={i18n.language === 'en'}
-            />
-          }
-          label={<IconFlagUK className={classes.language} />}
-        />
-        <FormControlLabel
-          value="end"
-          control={
-            <Radio
-              id="de"
-              name="language"
-              onChange={handleLanguageChange}
-              value="de"
-              checked={i18n.language === 'de'}
-            />
-          }
-          label={<IconFlagDE className={classes.language} />}
-        />
-      </Grid>
+      <FormControlLabel
+        value="end"
+        control={
+          <Radio
+            id="en"
+            name="language"
+            onChange={handleLanguageChange}
+            value="en"
+            checked={i18n.language === 'en'}
+          />
+        }
+        label={<IconFlagUK className={classes.language} />}
+      />
+      <FormControlLabel
+        value="end"
+        control={
+          <Radio
+            id="de"
+            name="language"
+            onChange={handleLanguageChange}
+            value="de"
+            checked={i18n.language === 'de'}
+          />
+        }
+        label={<IconFlagDE className={classes.language} />}
+      />
     </>
   );
 }
