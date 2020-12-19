@@ -4,15 +4,7 @@
  *
  */
 import { Competition } from '@hyperremix/song-contest-rater-model';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Box, Card, Grid, makeStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { useState } from 'react';
 import { SmartDateTime } from '../../general/SmartDateTime';
@@ -21,21 +13,38 @@ interface Props {
   competition: Competition;
 }
 
-const useStyles = makeStyles({
-  media: {
-    minHeight: 200,
+const useStyles = makeStyles(() => ({
+  card: {
+    position: 'relative',
+    minWidth: 200,
+    minHeight: 250,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    '&:after': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      bottom: 0,
+      zIndex: 1,
+      background:
+        'linear-gradient(to top, #000, rgba(0,0,0,0.8) 25%, rgba(0,0,0,0) 50%)',
+    },
+  },
+  content: {
+    position: 'absolute',
+    zIndex: 2,
+    bottom: 0,
+    width: '100%',
   },
   country: {
     marginLeft: '0.5rem',
   },
-});
+}));
 
 export function CompetitionItem({ competition }: Props) {
   const classes = useStyles();
-
-  const image = competition.imageUrl
-    ? competition.imageUrl
-    : `${process.env.PUBLIC_URL}/logo192.png`;
 
   const [elevation, setElevation] = useState<number>(1);
 
@@ -47,6 +56,12 @@ export function CompetitionItem({ competition }: Props) {
     setElevation(1);
   };
 
+  const styles = {
+    card: {
+      backgroundImage: `url(${competition.imageUrl})`,
+    },
+  };
+
   return (
     <>
       <Box paddingBottom={1}>
@@ -54,13 +69,10 @@ export function CompetitionItem({ competition }: Props) {
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
           elevation={elevation}
+          style={styles.card}
+          className={classes.card}
         >
-          <CardMedia
-            className={classes.media}
-            image={image}
-            title={competition.cityName}
-          />
-          <CardContent>
+          <Box className={classes.content} px={2} paddingBottom={1}>
             <Grid
               container
               direction="row"
@@ -104,7 +116,7 @@ export function CompetitionItem({ competition }: Props) {
                 </Grid>
               </Box>
             </Grid>
-          </CardContent>
+          </Box>
         </Card>
       </Box>
     </>

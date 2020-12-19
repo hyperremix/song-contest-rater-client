@@ -63,7 +63,7 @@ export function CompetitionListPage() {
         <title>{t(...messages.competitionsTitle)}</title>
         <meta name="description" content={t(...messages.competitionsTitle)} />
       </Helmet>
-      <Box>
+      <Box paddingBottom={2}>
         {isLoading && <CircularProgress />}
         {error && <ApiErrorAlert error={error} />}
         <CompetitionListWrapper
@@ -89,10 +89,12 @@ export function CompetitionListPage() {
       )}
       {isExtraSmallMedia && (
         <Box>
-          <CompetitionListWrapper
-            header={t(...messages.upcomingCompetitionHeader)}
-            competitions={upcomingCompetitions}
-          />
+          <Box paddingBottom={2}>
+            <CompetitionListWrapper
+              header={t(...messages.upcomingCompetitionHeader)}
+              competitions={upcomingCompetitions}
+            />
+          </Box>
           <CompetitionListWrapper
             header={t(...messages.previousCompetitionHeader)}
             competitions={previousCompetitions}

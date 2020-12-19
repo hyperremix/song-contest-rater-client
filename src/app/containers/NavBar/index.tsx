@@ -6,6 +6,7 @@
 
 import {
   AppBar,
+  Box,
   Button,
   makeStyles,
   Menu,
@@ -43,47 +44,49 @@ export function NavBar() {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Song Contest Rater
-          </Typography>
-          <Button color="inherit">
-            <AccountCircle />
-          </Button>
-          <Button
-            color="inherit"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVert />
-          </Button>
-          <Menu
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            getContentAnchorEl={null}
-          >
-            <MenuItem disableRipple>
-              <ThemePicker />
-            </MenuItem>
-            <MenuItem disableRipple>
-              <LanguagePicker />
-            </MenuItem>
-          </Menu>
-        </Toolbar>
-      </AppBar>
+      <Box paddingBottom={2}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              Song Contest Rater
+            </Typography>
+            <Button color="inherit">
+              <AccountCircle />
+            </Button>
+            <Button
+              color="inherit"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVert />
+            </Button>
+            <Menu
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              getContentAnchorEl={null}
+            >
+              <MenuItem disableRipple>
+                <ThemePicker />
+              </MenuItem>
+              <MenuItem disableRipple>
+                <LanguagePicker />
+              </MenuItem>
+            </Menu>
+          </Toolbar>
+        </AppBar>
+      </Box>
     </>
   );
 }
