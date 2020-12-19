@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import * as React from 'react';
+import { useState } from 'react';
 import { SmartDateTime } from '../../components/SmartDateTime';
 
 interface Props {
@@ -36,10 +37,24 @@ export function CompetitionItem({ competition }: Props) {
     ? competition.imageUrl
     : `${process.env.PUBLIC_URL}/logo192.png`;
 
+  const [elevation, setElevation] = useState<number>(1);
+
+  const handleOnMouseOver = () => {
+    setElevation(15);
+  };
+
+  const handleOnMouseOut = () => {
+    setElevation(1);
+  };
+
   return (
     <>
       <Box m={1}>
-        <Card>
+        <Card
+          onMouseOver={handleOnMouseOver}
+          onMouseOut={handleOnMouseOut}
+          elevation={elevation}
+        >
           <CardMedia
             className={classes.media}
             image={image}
