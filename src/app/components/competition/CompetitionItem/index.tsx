@@ -37,6 +37,7 @@ const useStyles = makeStyles(() => ({
     zIndex: 2,
     bottom: 0,
     width: '100%',
+    color: 'white',
   },
   country: {
     marginLeft: '0.5rem',
