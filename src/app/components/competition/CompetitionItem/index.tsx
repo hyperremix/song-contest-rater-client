@@ -49,7 +49,7 @@ export function CompetitionItem({ competition }: Props) {
 
   return (
     <>
-      <Box m={1}>
+      <Box paddingBottom={1}>
         <Card
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}

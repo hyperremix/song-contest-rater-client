@@ -4,7 +4,13 @@
  *
  */
 
-import { CircularProgress, Grid } from '@material-ui/core';
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -30,6 +36,7 @@ export function CompetitionListPage() {
   useInjectSaga({ key: sliceKey, saga: competitionListPageSaga });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const previousCompetitions = useSelector(selectPreviousCompetitions);
   const upcomingCompetitions = useSelector(selectUpcomingCompetitions);
@@ -47,40 +54,61 @@ export function CompetitionListPage() {
     dispatch(competitionListPageActions.loadCompetitions());
   });
 
+  const isAtLeastSmallMedia = useMediaQuery(theme.breakpoints.up('sm'));
+  const isExtraSmallMedia = useMediaQuery(theme.breakpoints.down('xs'));
+
   return (
     <>
       <Helmet>
         <title>{t(...messages.competitionsTitle)}</title>
         <meta name="description" content={t(...messages.competitionsTitle)} />
       </Helmet>
-      <Grid container direction="column" justify="center" alignItems="stretch">
+      <Box>
         {isLoading && <CircularProgress />}
         {error && <ApiErrorAlert error={error} />}
-        {!!ongoingCompetition.length && (
-          <CompetitionList
-            header={t(...messages.ongoingCompetitionHeader)}
-            competitions={ongoingCompetition}
-          />
-        )}
-        {!!nextCompetition.length && (
-          <CompetitionList
-            header={t(...messages.nextCompetitionHeader)}
-            competitions={nextCompetition}
-          />
-        )}
-        {!!upcomingCompetitions.length && (
-          <CompetitionList
-            header={t(...messages.upcomingCompetitionHeader)}
-            competitions={upcomingCompetitions}
-          />
-        )}
-        {!!previousCompetitions.length && (
-          <CompetitionList
+        <CompetitionListWrapper
+          header={t(...messages.ongoingCompetitionHeader)}
+          competitions={ongoingCompetition}
+        />
+        <CompetitionListWrapper
+          header={t(...messages.nextCompetitionHeader)}
+          competitions={nextCompetition}
+        />
+      </Box>
+      {isAtLeastSmallMedia && (
+        <Grid container spacing={1}>
+          <CompetitionListWrapper
             header={t(...messages.previousCompetitionHeader)}
             competitions={previousCompetitions}
           />
-        )}
-      </Grid>
+          <CompetitionListWrapper
+            header={t(...messages.upcomingCompetitionHeader)}
+            competitions={upcomingCompetitions}
+          />
+        </Grid>
+      )}
+      {isExtraSmallMedia && (
+        <Box>
+          <CompetitionListWrapper
+            header={t(...messages.upcomingCompetitionHeader)}
+            competitions={upcomingCompetitions}
+          />
+          <CompetitionListWrapper
+            header={t(...messages.previousCompetitionHeader)}
+            competitions={previousCompetitions}
+          />
+        </Box>
+      )}
     </>
   );
 }
+
+const CompetitionListWrapper = ({ header, competitions }) => (
+  <>
+    {!!competitions.length && (
+      <Grid item xs>
+        <CompetitionList header={header} competitions={competitions} />
+      </Grid>
+    )}
+  </>
+);
