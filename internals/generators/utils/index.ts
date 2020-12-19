@@ -38,5 +38,7 @@ function walkDir(directory: string) {
 export function listComponentsDirectories() {
   // Not using path.join(__dirname,) as it give really long name when listed
   const sourceDir = 'src/';
-  return walkDir(sourceDir).filter(dirPath => dirPath.match(/components$/));
+  return walkDir(sourceDir).filter(dirPath =>
+    dirPath.match(/components\/[a-zA-Z]+$/),
+  );
 }

@@ -17,8 +17,8 @@ import {
 import { MoreVert } from '@material-ui/icons';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import * as React from 'react';
-import { LanguagePicker } from '../LanguagePicker';
-import { ThemePicker } from '../ThemePicker';
+import { LanguagePicker } from '../../components/menu/LanguagePicker';
+import { ThemePicker } from '../../components/menu/ThemePicker';
 
 const useStyles = makeStyles(theme => ({
   root: {

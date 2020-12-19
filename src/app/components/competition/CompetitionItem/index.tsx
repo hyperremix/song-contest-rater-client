@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import * as React from 'react';
 import { useState } from 'react';
-import { SmartDateTime } from '../../components/SmartDateTime';
+import { SmartDateTime } from '../../general/SmartDateTime';
 
 interface Props {
   competition: Competition;

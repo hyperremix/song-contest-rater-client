@@ -9,7 +9,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { TFunction } from 'i18next';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApiError } from '../../../types';
+import { ApiError } from '../../../../types';
 import { messages } from './messages';
 
 interface Props {

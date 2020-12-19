@@ -11,8 +11,8 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { ApiErrorAlert } from '../ApiErrorAlert';
-import { CompetitionList } from './CompetitionList';
+import { CompetitionList } from '../../components/competition/CompetitionList/Loadable';
+import { ApiErrorAlert } from '../../components/general/ApiErrorAlert';
 import { messages } from './messages';
 import { competitionListPageSaga } from './saga';
 import {
@@ -56,30 +56,30 @@ export function CompetitionListPage() {
       <Grid container direction="column" justify="center" alignItems="stretch">
         {isLoading && <CircularProgress />}
         {error && <ApiErrorAlert error={error} />}
-        {ongoingCompetition?.length && (
+        {!!ongoingCompetition.length && (
           <CompetitionList
             header={t(...messages.ongoingCompetitionHeader)}
             competitions={ongoingCompetition}
           />
         )}
-        {nextCompetition?.length ? (
+        {!!nextCompetition.length && (
           <CompetitionList
             header={t(...messages.nextCompetitionHeader)}
             competitions={nextCompetition}
           />
-        ) : null}
-        {upcomingCompetitions?.length ? (
+        )}
+        {!!upcomingCompetitions.length && (
           <CompetitionList
             header={t(...messages.upcomingCompetitionHeader)}
             competitions={upcomingCompetitions}
           />
-        ) : null}
-        {previousCompetitions?.length ? (
+        )}
+        {!!previousCompetitions.length && (
           <CompetitionList
             header={t(...messages.previousCompetitionHeader)}
             competitions={previousCompetitions}
           />
-        ) : null}
+        )}
       </Grid>
     </>
   );

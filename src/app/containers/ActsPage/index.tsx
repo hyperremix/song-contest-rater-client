@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { ApiErrorAlert } from '../ApiErrorAlert';
+import { ApiErrorAlert } from '../../components/general/ApiErrorAlert';
 import { ActItem } from './ActItem';
 import { messages } from './messages';
 import { actsPageSaga } from './saga';

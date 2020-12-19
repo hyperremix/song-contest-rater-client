@@ -11,7 +11,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
 import { NavBar } from './containers/NavBar';
