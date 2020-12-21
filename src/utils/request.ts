@@ -1,3 +1,5 @@
+import Auth, { CognitoUser } from '@aws-amplify/auth';
+
 export class ResponseError extends Error {
   public response: Response;
 
@@ -36,6 +38,18 @@ function checkStatus(response: Response): Response {
   throw error;
 }
 
+async function addAuthHeader(options?: RequestInit): Promise<RequestInit> {
+  const user: CognitoUser = await Auth.currentAuthenticatedUser();
+  const token = user.getSignInUserSession()?.getIdToken().getJwtToken();
+  return {
+    ...options,
+    headers: {
+      ...options?.headers,
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 /**
  * Requests a URL, returning a promise
  *
@@ -48,7 +62,8 @@ export async function request(
   url: string,
   options?: RequestInit,
 ): Promise<{} | { err: ResponseError }> {
-  const fetchResponse = await fetch(url, options);
+  const optionsWithAuth = await addAuthHeader(options);
+  const fetchResponse = await fetch(url, optionsWithAuth);
   const response = checkStatus(fetchResponse);
   return await parseJSON(response);
 }

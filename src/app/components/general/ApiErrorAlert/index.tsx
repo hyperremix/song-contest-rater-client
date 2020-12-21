@@ -21,7 +21,7 @@ export function ApiErrorAlert(props: Props) {
   return (
     <>
       <Box mt={1}>
-        <Alert severity="error">
+        <Alert severity="error" variant="filled">
           <AlertTitle>Error</AlertTitle>
           {getApiError(t, props.error)}
         </Alert>

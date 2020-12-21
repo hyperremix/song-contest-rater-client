@@ -21,9 +21,12 @@ import { configureAppStore } from 'store/configureStore';
 import { ThemeProvider } from 'styles/theme';
 // Initialize languages
 import './locales/i18n';
+import { configureAuth } from './utils/configureAuth';
 
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
+
+configureAuth();
 
 ReactDOM.render(
   <Provider store={store}>

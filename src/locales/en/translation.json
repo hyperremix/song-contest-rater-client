@@ -48,5 +48,12 @@
   },
   "countries": {
     "Sweden": "Sweden"
+  },
+  "loginPage": {
+    "title": "Login",
+    "signIn": "Sign In",
+    "email": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?"
   }
 }

@@ -20,6 +20,7 @@ const competitionListPageSlice = createSlice({
   reducers: {
     loadCompetitions(state) {
       clearState(state);
+      state.loading = true;
     },
     competitionsLoaded(state, action: PayloadAction<Competition[]>) {
       const now = new Date();
@@ -37,13 +38,12 @@ const competitionListPageSlice = createSlice({
     competitionsError(state, action: PayloadAction<ApiError>) {
       clearState(state);
       state.error = action.payload;
-      state.loading = false;
     },
   },
 });
 
 const clearState = (state: ContainerState) => {
-  state.loading = true;
+  state.loading = false;
   state.error = null;
   state.previousCompetitions = [];
   state.upcomingCompetitions = [];
