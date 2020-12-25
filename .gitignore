@@ -21,3 +21,6 @@ yarn-error.log*
 generated-cra-app
 .cra-template-rb
 template
+.gitsecret/keys/random_seed
+!*.secret
+.env.local
