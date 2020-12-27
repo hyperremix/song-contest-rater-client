@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-songcontestrater-dev-83419-authRole",
+      "UnauthRoleArn": "arn:aws:iam::070410180944:role/amplify-songcontestrater-dev-83419-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::070410180944:role/amplify-songcontestrater-dev-83419-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-songcontestrater-dev-83419-deployment",
+      "UnauthRoleName": "amplify-songcontestrater-dev-83419-unauthRole",
+      "StackName": "amplify-songcontestrater-dev-83419",
+      "StackId": "arn:aws:cloudformation:eu-central-1:070410180944:stack/amplify-songcontestrater-dev-83419/33833080-4755-11eb-97cb-02e71ad80288",
+      "AmplifyAppId": "d20hhttsuohwgi"
+    }
+  }
+}
