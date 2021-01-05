@@ -8,7 +8,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - YARN_REGISTRY="https://npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" yarn
+        - yarn config set registry "https://npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN"
+        - yarn
     build:
       commands:
         - yarn build
