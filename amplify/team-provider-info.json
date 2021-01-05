@@ -10,6 +10,14 @@
       "StackName": "amplify-songcontestrater-dev-83419",
       "StackId": "arn:aws:cloudformation:eu-central-1:070410180944:stack/amplify-songcontestrater-dev-83419/33833080-4755-11eb-97cb-02e71ad80288",
       "AmplifyAppId": "d20hhttsuohwgi"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d20hhttsuohwgi",
+          "type": "cicd"
+        }
+      }
     }
   }
 }
