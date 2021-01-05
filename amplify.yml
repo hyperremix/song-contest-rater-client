@@ -8,7 +8,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yarn config set registry "https://npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN"
+        - printf '%s\n' '@hyperremix:registry=https://npm.pkg.github.com/' "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
         - yarn
     build:
       commands:
