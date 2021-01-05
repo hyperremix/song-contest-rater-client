@@ -8,7 +8,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yarn
+        - YARN_REGISTRY=https://npm.pkg.github.com/ yarn
     build:
       commands:
         - yarn build
