@@ -13,7 +13,7 @@
     "notFound": "Die gesuchte Sache wurde nicht gefunden.",
     "emptyList": "Es gibt noch keine Einträge von diesem Typ.",
     "badRequest": "Die Anfrage kann nicht verarbeitet werden.",
-    "unauthorized": "Sie sind nicht berechtigt, diese Aktion durchzuführen.",
+    "unauthorized": "Du bist nicht berechtigt, diese Aktion durchzuführen.",
     "forbidden": "Diese Aktion ist verboten.",
     "unprocessableEntity": "Die Anfrage hat die Validierung nicht bestanden.",
     "internalServerError": "Etwas ist schief gelaufen.",
@@ -62,7 +62,9 @@
     "forgotPassword": "Passwort Vergessen?",
     "register": "Noch kein Konto? Registriere dich!",
     "firstname": "Vorname",
-    "lastname": "Nachname"
+    "lastname": "Nachname",
+    "initialSignInHeader": "Glückwunsch!",
+    "initialSignInDescription": "Du hast ein Konto erfolgreich erstellt. Melde dich mit deinen Anmeldedaten an."
   },
   "signUpPage": {
     "title": "Registrierung",
@@ -70,5 +72,13 @@
     "existingAccount": "Schon ein Konto? Hier anmelden!",
     "togglePasswordVisibility": "password zeigen/verstecken",
     "signUpButton": "Registrieren"
+  },
+  "emailConfirmation": {
+    "title": "E-Mail-Bestätigung",
+    "emailConfirmation": "E-Mail-Bestätigung",
+    "code": "Code",
+    "confirm": "Bestätigen",
+    "description": "Du hast gerade eine E-Mail mit deinem Bestätigungscode erhalten. Gib den Code unten ein, um dein Konto zu aktivieren",
+    "descriptionHeader": "Fast geschafft..."
   }
 }

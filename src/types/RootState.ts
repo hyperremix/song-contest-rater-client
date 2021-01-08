@@ -3,6 +3,7 @@ import { ThemeState } from 'styles/theme/types';
 import { CompetitionListPageState } from 'app/containers/CompetitionListPage/types';
 import { LoginPageState } from 'app/containers/LoginPage/types';
 import { SignUpPageState } from 'app/containers/SignUpPage/types';
+import { EmailConfirmationPageState } from 'app/containers/EmailConfirmationPage/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -15,5 +16,6 @@ export interface RootState {
   competitionListPage?: CompetitionListPageState;
   loginPage?: LoginPageState;
   signUpPage?: SignUpPageState;
+  emailConfirmationPage?: EmailConfirmationPageState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

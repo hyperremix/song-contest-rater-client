@@ -42,6 +42,9 @@ const signUpPageSlice = createSlice({
 const clearState = (state: ContainerState) => {
   state.loading = false;
   state.error = null;
+  state.firstname = null;
+  state.lastname = null;
+  state.email = null;
 };
 
 export const {

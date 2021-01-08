@@ -19,4 +19,12 @@ export const messages = {
     translations.loginPage.register,
     "Don't have an account? Sign up!",
   ),
+  initialSignInDescriptionHeader: _t(
+    translations.loginPage.initialSignInHeader,
+    'Congratulations!',
+  ),
+  initialSignInDescription: _t(
+    translations.loginPage.initialSignInDescription,
+    'You successfully created an account. Sign in using your credentials.',
+  ),
 };

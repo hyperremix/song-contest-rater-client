@@ -16,7 +16,7 @@ export function* signUp({
         email,
       }),
     );
-    history.push('/');
+    history.push(`/emailconfirmation?email=${email}`);
   } catch (err) {
     yield put(signUpPageActions.signUpFailed(err?.message));
   }

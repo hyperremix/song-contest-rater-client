@@ -14,6 +14,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
+import { EmailConfirmationPage } from './containers/EmailConfirmationPage/Loadable';
 import { LoginPage } from './containers/LoginPage/Loadable';
 import { NavBar } from './containers/NavBar';
 import { SignUpPage } from './containers/SignUpPage/Loadable';
@@ -41,6 +42,11 @@ export function App() {
           <Route exact path="/" component={CompetitionListPage} />
           <Route exact path="/signin" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
+          <Route
+            exact
+            path="/emailconfirmation"
+            component={EmailConfirmationPage}
+          />
           <Route exact path="/acts" component={ActsPage} />
           <Route component={NotFoundPage} />
         </Switch>

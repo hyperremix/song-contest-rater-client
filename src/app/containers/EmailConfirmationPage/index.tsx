@@ -1,6 +1,6 @@
 /**
  *
- * LoginPage
+ * EmailConfirmationPage
  *
  */
 
@@ -11,7 +11,6 @@ import {
   CircularProgress,
   Container,
   Grid,
-  Link,
   makeStyles,
   TextField,
   Typography,
@@ -27,9 +26,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from '../../../utils/useFormFields';
 import { messages } from './messages';
-import { tryLoginSaga } from './saga';
+import { tryConfirmEmailSaga } from './saga';
 import { selectError, selectLoading } from './selectors';
-import { loginPageActions, reducer, sliceKey } from './slice';
+import { emailConfirmationPageActions, reducer, sliceKey } from './slice';
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -57,21 +56,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function LoginPage() {
+export function EmailConfirmationPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: tryLoginSaga });
+  useInjectSaga({ key: sliceKey, saga: tryConfirmEmailSaga });
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
   const classes = useStyles();
   const history = useHistory();
 
-  const [{ email, password }, handleFieldChange] = useFormFields({
-    email: '',
-    password: '',
+  const signUpEmail = qs.parse(location.search, { ignoreQueryPrefix: true })
+    .email;
+  const [{ email, code }, handleFieldChange] = useFormFields({
+    email: signUpEmail,
+    code: '',
   });
-  const isInitialSignIn = qs.parse(location.search, { ignoreQueryPrefix: true })
-    .isInitialSignIn;
 
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -81,15 +80,17 @@ export function LoginPage() {
       evt.preventDefault();
     }
 
-    if (email?.trim().length > 0 && password?.trim().length > 0) {
-      dispatch(loginPageActions.tryLogin({ email, password, history }));
+    if (email?.trim().length > 0 && code?.trim().length > 0) {
+      dispatch(
+        emailConfirmationPageActions.tryConfirmEmail({ email, code, history }),
+      );
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>{t(...messages.loginTitle)}</title>
+        <title>{t(...messages.emailConfirmationTitle)}</title>
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <Container maxWidth="xs">
@@ -98,7 +99,7 @@ export function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {t(...messages.signInLabel)}
+            {t(...messages.emailConfirmationLabel)}
           </Typography>
 
           <form className={classes.form} noValidate onSubmit={onSubmitForm}>
@@ -114,20 +115,14 @@ export function LoginPage() {
                   </Alert>
                 </Box>
               </Grid>
-              {isInitialSignIn === 'true' && (
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h6"
-                    className={classes.descriptionHeader}
-                  >
-                    {t(...messages.initialSignInDescriptionHeader)}
-                  </Typography>
-                  <Typography className={classes.description}>
-                    {t(...messages.initialSignInDescription)}
-                  </Typography>
-                </Grid>
-              )}
-
+              <Grid item xs={12}>
+                <Typography variant="h6" className={classes.descriptionHeader}>
+                  {t(...messages.emailConfirmationDescriptionHeader)}
+                </Typography>
+                <Typography className={classes.description}>
+                  {t(...messages.emailConfirmationDescription)}
+                </Typography>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -138,7 +133,6 @@ export function LoginPage() {
                   type="email"
                   id="email"
                   autoComplete="email"
-                  autoFocus
                   value={email}
                   onChange={handleFieldChange}
                 />
@@ -148,12 +142,11 @@ export function LoginPage() {
                   variant="outlined"
                   required
                   fullWidth
-                  name="password"
-                  label={t(...messages.passwordLabel)}
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={password}
+                  name="code"
+                  label={t(...messages.codeLabel)}
+                  id="code"
+                  autoFocus
+                  value={code}
                   onChange={handleFieldChange}
                 />
               </Grid>
@@ -167,7 +160,7 @@ export function LoginPage() {
                     disabled={isLoading}
                     className={classes.submit}
                   >
-                    {t(...messages.signInLabel)}
+                    {t(...messages.confirmLabel)}
                   </Button>
                   {isLoading && (
                     <CircularProgress
@@ -176,18 +169,6 @@ export function LoginPage() {
                     />
                   )}
                 </Box>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/forgotpassword" variant="body2">
-                      {t(...messages.forgotPasswordLabel)}
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/signup" variant="body2">
-                      {t(...messages.registerLabel)}
-                    </Link>
-                  </Grid>
-                </Grid>
               </Grid>
             </Grid>
           </form>

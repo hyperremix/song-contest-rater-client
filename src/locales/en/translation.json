@@ -62,7 +62,9 @@
     "forgotPassword": "Forgot Password?",
     "register": "Don't have an account? Sign up!",
     "firstname": "First Name",
-    "lastname": "Last Name"
+    "lastname": "Last Name",
+    "initialSignInHeader": "Congratulations!",
+    "initialSignInDescription": "You successfully created an account. Sign in using your credentials."
   },
   "signUpPage": {
     "title": "Sign Up",
@@ -70,5 +72,13 @@
     "existingAccount": "Already have an account? Sign in!",
     "togglePasswordVisibility": "toggle password visibility",
     "signUpButton": "Sign Up"
+  },
+  "emailConfirmation": {
+    "title": "Email Confirmation",
+    "emailConfirmation": "Email Confirmation",
+    "code": "Code",
+    "confirm": "Confirm",
+    "description": "You just received an email containing your confirmation code. Enter the code below to activate your account.",
+    "descriptionHeader": "Almost there..."
   }
 }
