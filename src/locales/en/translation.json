@@ -12,7 +12,12 @@
   "apiError": {
     "notFound": "The thing you were looking for was not found.",
     "emptyList": "There are no entries of this type yet.",
-    "responseError": "Something went wrong."
+    "badRequest": "Unable to process request.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "forbidden": "This action is forbidden.",
+    "unprocessableEntity": "The request did not pass validation.",
+    "internalServerError": "Something went wrong.",
+    "defaultError": "An unexpected error occurred!"
   },
   "generalErrors": {
     "pageNotFound": "Page Not Found"

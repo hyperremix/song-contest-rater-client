@@ -1,6 +1,5 @@
 import { Act } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ApiError } from 'types';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState } from './types';
 
@@ -24,7 +23,7 @@ const actsPageSlice = createSlice({
       state.acts = action.payload;
       state.loading = false;
     },
-    actsError(state, action: PayloadAction<ApiError>) {
+    actsError(state, action: PayloadAction<Error>) {
       state.error = action.payload;
       state.loading = false;
     },

@@ -33,18 +33,23 @@ function checkStatus(response: Response): Response {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const error = new ResponseError(response);
-  error.response = response;
-  throw error;
+
+  throw new ResponseError(response);
 }
 
-async function addAuthHeader(options?: RequestInit): Promise<RequestInit> {
+async function addAuthHeader(
+  options?: RequestInit,
+): Promise<RequestInit | undefined> {
+  if (!options) {
+    return options;
+  }
+
   const user: CognitoUser = await Auth.currentAuthenticatedUser();
   const token = user.getSignInUserSession()?.getIdToken().getJwtToken();
   return {
     ...options,
     headers: {
-      ...options?.headers,
+      ...options.headers,
       Authorization: `Bearer ${token}`,
     },
   };

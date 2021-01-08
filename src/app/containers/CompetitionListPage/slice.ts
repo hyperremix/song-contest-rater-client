@@ -1,6 +1,5 @@
 import { Competition } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ApiError } from 'types';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState } from './types';
 
@@ -35,7 +34,7 @@ const competitionListPageSlice = createSlice({
       state.nextCompetition = nextCompetition;
       state.ongoingCompetition = ongoingCompetition;
     },
-    competitionsError(state, action: PayloadAction<ApiError>) {
+    competitionsError(state, action: PayloadAction<Error>) {
       clearState(state);
       state.error = action.payload;
     },

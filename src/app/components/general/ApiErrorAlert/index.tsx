@@ -9,11 +9,11 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { TFunction } from 'i18next';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApiError } from '../../../../types';
+import { ResponseError } from 'utils/request';
 import { messages } from './messages';
 
 interface Props {
-  error: ApiError;
+  error: Error;
 }
 
 export function ApiErrorAlert(props: Props) {
@@ -30,15 +30,25 @@ export function ApiErrorAlert(props: Props) {
   );
 }
 
-export const getApiError = (t: TFunction, error: ApiError) => {
-  switch (error) {
-    case ApiError.NOT_FOUND:
+export const getApiError = (t: TFunction, error: Error): string => {
+  if (!(error instanceof ResponseError)) {
+    return t(...messages.defaultErrorText);
+  }
+
+  switch (error.response.status) {
+    case 400:
+      return t(...messages.badRequestErrorText);
+    case 401:
+      return t(...messages.unauthorizedErrorText);
+    case 403:
+      return t(...messages.forbiddenErrorText);
+    case 404:
       return t(...messages.notFoundErrorText);
-    case ApiError.EMPTY_LIST:
-      return t(...messages.emptyListErrorText);
-    case ApiError.RESPONSE_ERROR:
-      return t(...messages.responseErrorText);
+    case 422:
+      return t(...messages.unprocessableEntityErrorText);
+    case 500:
+      return t(...messages.internalServerErrorText);
     default:
-      return 'An unmapped error has occurred!';
+      return t(...messages.defaultErrorText);
   }
 };

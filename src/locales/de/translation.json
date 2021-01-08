@@ -10,9 +10,14 @@
     "title": "Auftritte"
   },
   "apiError": {
-    "notFound": "Das wonach du gesucht hast, wurde nicht gefunden.",
+    "notFound": "Die gesuchte Sache wurde nicht gefunden.",
     "emptyList": "Es gibt noch keine Einträge von diesem Typ.",
-    "responseError": "Etwas ist schief gelaufen."
+    "badRequest": "Die Anfrage kann nicht verarbeitet werden.",
+    "unauthorized": "Sie sind nicht berechtigt, diese Aktion durchzuführen.",
+    "forbidden": "Diese Aktion ist verboten.",
+    "unprocessableEntity": "Die Anfrage hat die Validierung nicht bestanden.",
+    "internalServerError": "Etwas ist schief gelaufen.",
+    "defaultError": "Ein nicht unerwarteter Fehler ist aufgetreten!"
   },
   "generalErrors": {
     "pageNotFound": "Die Seite wurde nicht gefunden"

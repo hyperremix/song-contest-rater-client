@@ -8,4 +8,8 @@ import { _t } from 'utils/messages';
 
 export const messages = {
   actsTitle: _t(translations.acts.title, 'Acts'),
+  emptyListErrorText: _t(
+    translations.apiError.emptyList,
+    'There are no entries of this type yet.',
+  ),
 };

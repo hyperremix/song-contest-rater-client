@@ -7,16 +7,32 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
+  badRequestErrorText: _t(
+    translations.apiError.badRequest,
+    'Unable to process request.',
+  ),
+  unauthorizedErrorText: _t(
+    translations.apiError.unauthorized,
+    'You are not authorized to perform this action.',
+  ),
+  forbiddenErrorText: _t(
+    translations.apiError.forbidden,
+    'This action is forbidden.',
+  ),
   notFoundErrorText: _t(
     translations.apiError.notFound,
     'The thing you were looking for was not found.',
   ),
-  emptyListErrorText: _t(
-    translations.apiError.emptyList,
-    'There are no entries of this type yet.',
+  unprocessableEntityErrorText: _t(
+    translations.apiError.unprocessableEntity,
+    'The request did not pass validation.',
   ),
-  responseErrorText: _t(
-    translations.apiError.responseError,
+  internalServerErrorText: _t(
+    translations.apiError.internalServerError,
     'Something went wrong.',
+  ),
+  defaultErrorText: _t(
+    translations.apiError.defaultError,
+    'An unexpected error occurred!',
   ),
 };

@@ -21,4 +21,8 @@ export const messages = {
     translations.competitionList.previousHeader,
     'Previous',
   ),
+  emptyListErrorText: _t(
+    translations.apiError.emptyList,
+    'There are no entries of this type yet.',
+  ),
 };
