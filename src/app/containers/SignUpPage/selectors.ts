@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'types';
 import { initialState } from './slice';
 
-const selectDomain = (state: RootState) => state.loginPage || initialState;
+const selectDomain = (state: RootState) => state.signUpPage || initialState;
 
 export const selectLoading = createSelector(
   [selectDomain],
@@ -10,5 +10,3 @@ export const selectLoading = createSelector(
 );
 
 export const selectError = createSelector([selectDomain], state => state.error);
-
-export const selectEmail = createSelector([selectDomain], state => state.email);

@@ -54,6 +54,16 @@
     "signIn": "Anmelden",
     "email": "E-Mail Adresse",
     "password": "Passwort",
-    "forgotPassword": "Passwort Vergessen?"
+    "forgotPassword": "Passwort Vergessen?",
+    "register": "Noch kein Konto? Registriere dich!",
+    "firstname": "Vorname",
+    "lastname": "Nachname"
+  },
+  "signUpPage": {
+    "title": "Registrierung",
+    "signUp": "Registrierung",
+    "existingAccount": "Schon ein Konto? Hier anmelden!",
+    "togglePasswordVisibility": "password zeigen/verstecken",
+    "signUpButton": "Registrieren"
   }
 }

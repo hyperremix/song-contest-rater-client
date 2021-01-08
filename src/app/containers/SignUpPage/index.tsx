@@ -1,6 +1,6 @@
 /**
  *
- * LoginPage
+ * SignUpPage
  *
  */
 
@@ -11,11 +11,14 @@ import {
   CircularProgress,
   Container,
   Grid,
+  IconButton,
+  InputAdornment,
   Link,
   makeStyles,
   TextField,
   Typography,
 } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Alert } from '@material-ui/lab';
 import * as React from 'react';
@@ -26,9 +29,9 @@ import { useHistory } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from '../../../utils/useFormFields';
 import { messages } from './messages';
-import { tryLoginSaga } from './saga';
+import { trySignUpSaga } from './saga';
 import { selectError, selectLoading } from './selectors';
-import { loginPageActions, reducer, sliceKey } from './slice';
+import { reducer, signUpPageActions, sliceKey } from './slice';
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -50,17 +53,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function LoginPage() {
+export function SignUpPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: tryLoginSaga });
+  useInjectSaga({ key: sliceKey, saga: trySignUpSaga });
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
-  const [{ email, password }, handleFieldChange] = useFormFields({
+  const [
+    { firstname, lastname, email, password },
+    handleFieldChange,
+  ] = useFormFields({
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
   });
+
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -71,15 +81,33 @@ export function LoginPage() {
     }
 
     if (email?.trim().length > 0 && password?.trim().length > 0) {
-      dispatch(loginPageActions.tryLogin({ email, password, history }));
+      dispatch(
+        signUpPageActions.trySignUp({
+          firstname,
+          lastname,
+          email,
+          password,
+          history,
+        }),
+      );
     }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
   };
 
   return (
     <>
       <Helmet>
-        <title>{t(...messages.loginTitle)}</title>
-        <meta name="description" content="Description of LoginPage" />
+        <title>{t(...messages.signUpTitle)}</title>
+        <meta name="description" content="Description of SignUpPage" />
       </Helmet>
       <Container maxWidth="xs">
         <Grid container direction="column" justify="center" alignItems="center">
@@ -87,7 +115,7 @@ export function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {t(...messages.signInLabel)}
+            {t(...messages.signUpLabel)}
           </Typography>
 
           <form className={classes.form} noValidate onSubmit={onSubmitForm}>
@@ -103,6 +131,33 @@ export function LoginPage() {
                   </Alert>
                 </Box>
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="firstname"
+                  label={t(...messages.firstnameLabel)}
+                  id="firstname"
+                  autoComplete="given-name"
+                  autoFocus
+                  value={firstname}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="lastname"
+                  label={t(...messages.lastnameLabel)}
+                  id="lastname"
+                  autoComplete="family-name"
+                  value={lastname}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -113,7 +168,6 @@ export function LoginPage() {
                   type="email"
                   id="email"
                   autoComplete="email"
-                  autoFocus
                   value={email}
                   onChange={handleFieldChange}
                 />
@@ -125,11 +179,25 @@ export function LoginPage() {
                   fullWidth
                   name="password"
                   label={t(...messages.passwordLabel)}
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   value={password}
                   onChange={handleFieldChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={t(...messages.togglePasswordVisibility)}
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,7 +210,7 @@ export function LoginPage() {
                     disabled={isLoading}
                     className={classes.submit}
                   >
-                    {t(...messages.signInLabel)}
+                    {t(...messages.signUpButton)}
                   </Button>
                   {isLoading && (
                     <CircularProgress
@@ -151,17 +219,12 @@ export function LoginPage() {
                     />
                   )}
                 </Box>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/forgotpassword" variant="body2">
-                      {t(...messages.forgotPasswordLabel)}
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/signup" variant="body2">
-                      {t(...messages.registerLabel)}
-                    </Link>
-                  </Grid>
+              </Grid>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link href="/signin" variant="body2">
+                    {t(...messages.existingAccount)}
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>

@@ -16,6 +16,7 @@ import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
 import { LoginPage } from './containers/LoginPage/Loadable';
 import { NavBar } from './containers/NavBar';
+import { SignUpPage } from './containers/SignUpPage/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -38,7 +39,8 @@ export function App() {
       <Container maxWidth="md">
         <Switch>
           <Route exact path="/" component={CompetitionListPage} />
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signin" component={LoginPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/acts" component={ActsPage} />
           <Route component={NotFoundPage} />
         </Switch>

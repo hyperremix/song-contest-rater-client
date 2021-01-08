@@ -2,6 +2,7 @@ import { ActsPageState } from 'app/containers/ActsPage/types';
 import { ThemeState } from 'styles/theme/types';
 import { CompetitionListPageState } from 'app/containers/CompetitionListPage/types';
 import { LoginPageState } from 'app/containers/LoginPage/types';
+import { SignUpPageState } from 'app/containers/SignUpPage/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -13,5 +14,6 @@ export interface RootState {
   actsPage?: ActsPageState;
   competitionListPage?: CompetitionListPageState;
   loginPage?: LoginPageState;
+  signUpPage?: SignUpPageState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

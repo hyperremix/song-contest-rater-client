@@ -50,10 +50,20 @@
     "Sweden": "Sweden"
   },
   "loginPage": {
-    "title": "Login",
+    "title": "Sign In",
     "signIn": "Sign In",
     "email": "Email Address",
     "password": "Password",
-    "forgotPassword": "Forgot Password?"
+    "forgotPassword": "Forgot Password?",
+    "register": "Don't have an account? Sign up!",
+    "firstname": "First Name",
+    "lastname": "Last Name"
+  },
+  "signUpPage": {
+    "title": "Sign Up",
+    "signUp": "Sign Up",
+    "existingAccount": "Already have an account? Sign in!",
+    "togglePasswordVisibility": "toggle password visibility",
+    "signUpButton": "Sign Up"
   }
 }

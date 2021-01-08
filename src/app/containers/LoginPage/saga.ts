@@ -5,10 +5,10 @@ import { loginPageActions } from './slice';
 import { LoginAction } from './types';
 
 export function* login({
-  payload: { username, password, history },
+  payload: { email, password, history },
 }: PayloadAction<LoginAction>) {
   try {
-    const user: CognitoUser = yield call([Auth, 'signIn'], username, password);
+    const user: CognitoUser = yield call([Auth, 'signIn'], email, password);
     yield put(loginPageActions.loginSuccess(user.getUsername()));
     history.push('/');
   } catch (err) {

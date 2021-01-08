@@ -50,7 +50,7 @@ export function NavBar() {
             <Typography variant="h6" className={classes.title}>
               Song Contest Rater
             </Typography>
-            <Button color="inherit" href="/login">
+            <Button color="inherit" href="/signin">
               <AccountCircle />
             </Button>
             <Button
