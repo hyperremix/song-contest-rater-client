@@ -1,6 +1,6 @@
 /**
  *
- * LoginPage
+ * ForgotPasswordPage
  *
  */
 
@@ -11,25 +11,23 @@ import {
   CircularProgress,
   Container,
   Grid,
-  Link,
   makeStyles,
   TextField,
   Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Alert } from '@material-ui/lab';
-import qs from 'qs';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from '../../../utils/useFormFields';
 import { messages } from './messages';
-import { tryLoginSaga } from './saga';
+import { tryInitiateForgotPassword } from './saga';
 import { selectError, selectLoading } from './selectors';
-import { loginPageActions, reducer, sliceKey } from './slice';
+import { forgotPasswordPageActions, reducer, sliceKey } from './slice';
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -57,22 +55,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function LoginPage() {
+export function ForgotPasswordPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: tryLoginSaga });
+  useInjectSaga({ key: sliceKey, saga: tryInitiateForgotPassword });
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const location = useLocation();
   const classes = useStyles();
   const history = useHistory();
 
-  const [{ email, password }, handleFieldChange] = useFormFields({
+  const [{ email }, handleFieldChange] = useFormFields({
     email: '',
-    password: '',
   });
-  const queryString = qs.parse(location.search, { ignoreQueryPrefix: true });
-  const isInitialSignIn = queryString.isInitialSignIn;
-  const isPasswordReset = queryString.isPasswordReset;
 
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -82,15 +75,17 @@ export function LoginPage() {
       evt.preventDefault();
     }
 
-    if (email?.trim().length > 0 && password?.trim().length > 0) {
-      dispatch(loginPageActions.tryLogin({ email, password, history }));
+    if (email?.trim().length > 0) {
+      dispatch(
+        forgotPasswordPageActions.initiateForgotPassword({ email, history }),
+      );
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>{t(...messages.loginTitle)}</title>
+        <title>{t(...messages.passwordResetTitle)}</title>
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <Container maxWidth="xs">
@@ -99,7 +94,7 @@ export function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {t(...messages.signInLabel)}
+            {t(...messages.passwordResetLabel)}
           </Typography>
 
           <form className={classes.form} noValidate onSubmit={onSubmitForm}>
@@ -115,32 +110,14 @@ export function LoginPage() {
                   </Alert>
                 </Box>
               </Grid>
-              {isInitialSignIn === 'true' && (
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h6"
-                    className={classes.descriptionHeader}
-                  >
-                    {t(...messages.initialSignInDescriptionHeader)}
-                  </Typography>
-                  <Typography className={classes.description}>
-                    {t(...messages.initialSignInDescription)}
-                  </Typography>
-                </Grid>
-              )}
-              {isPasswordReset === 'true' && (
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h6"
-                    className={classes.descriptionHeader}
-                  >
-                    {t(...messages.passwordResetDescriptionHeader)}
-                  </Typography>
-                  <Typography className={classes.description}>
-                    {t(...messages.passwordResetDescription)}
-                  </Typography>
-                </Grid>
-              )}
+              <Grid item xs={12}>
+                <Typography variant="h6" className={classes.descriptionHeader}>
+                  {t(...messages.forgotPasswordDescriptionHeader)}
+                </Typography>
+                <Typography className={classes.description}>
+                  {t(...messages.forgotPasswordDescription)}
+                </Typography>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -151,22 +128,7 @@ export function LoginPage() {
                   type="email"
                   id="email"
                   autoComplete="email"
-                  autoFocus
                   value={email}
-                  onChange={handleFieldChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label={t(...messages.passwordLabel)}
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={password}
                   onChange={handleFieldChange}
                 />
               </Grid>
@@ -180,7 +142,7 @@ export function LoginPage() {
                     disabled={isLoading}
                     className={classes.submit}
                   >
-                    {t(...messages.signInLabel)}
+                    {t(...messages.resetPasswordButton)}
                   </Button>
                   {isLoading && (
                     <CircularProgress
@@ -189,18 +151,6 @@ export function LoginPage() {
                     />
                   )}
                 </Box>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/forgotpassword" variant="body2">
-                      {t(...messages.forgotPasswordLabel)}
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/signup" variant="body2">
-                      {t(...messages.registerLabel)}
-                    </Link>
-                  </Grid>
-                </Grid>
               </Grid>
             </Grid>
           </form>

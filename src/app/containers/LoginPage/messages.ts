@@ -27,4 +27,12 @@ export const messages = {
     translations.loginPage.initialSignInDescription,
     'You successfully created an account. Sign in using your credentials.',
   ),
+  passwordResetDescriptionHeader: _t(
+    translations.loginPage.passwordResetHeader,
+    'Congratulations!',
+  ),
+  passwordResetDescription: _t(
+    translations.loginPage.passwordResetDescription,
+    'You successfully changed your password. Sign in using your credentials.',
+  ),
 };

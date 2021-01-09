@@ -64,7 +64,9 @@
     "firstname": "Vorname",
     "lastname": "Nachname",
     "initialSignInHeader": "Glückwunsch!",
-    "initialSignInDescription": "Du hast ein Konto erfolgreich erstellt. Melde dich mit deinen Anmeldedaten an."
+    "initialSignInDescription": "Du hast ein Konto erfolgreich erstellt. Melde dich mit deinen Anmeldedaten an.",
+    "passwordResetHeader": "Glückwunsch!",
+    "passwordResetDescription": "Du hast dein Passwort erfolgreich geändert. Melde dich mit deinen Anmeldedaten an."
   },
   "signUpPage": {
     "title": "Registrierung",
@@ -80,5 +82,21 @@
     "confirm": "Bestätigen",
     "description": "Du hast gerade eine E-Mail mit deinem Bestätigungscode erhalten. Gib den Code unten ein, um dein Konto zu aktivieren",
     "descriptionHeader": "Fast geschafft..."
+  },
+  "forgotPasswordPage": {
+    "title": "Passwort Zurücksetzen",
+    "passwordReset": "Passwort Zurücksetzen",
+    "resetPasswordButton": "Passwort Zurücksetzen",
+    "descriptionHeader": "Passwort Vergessen?",
+    "description": "Kein Problem! Gib einfach deine E-Mail unten ein, um dein Passwort zurückzusetzen."
+  },
+  "forgotPasswordSubmitPage": {
+    "title": "Passwort Ändern",
+    "forgotPasswordSubmit": "Passwort Ändern",
+    "code": "Code",
+    "submit": "Passwort Ändern",
+    "togglePasswordVisibility": "password zeigen/verstecken",
+    "descriptionHeader": "Fast geschafft...",
+    "description": "Du hast gerade eine E-Mail mit deinem Reset-Code erhalten. Gib den Code zusammen mit einem neuen Passwort unten ein, um dein Passwort zu ändern."
   }
 }

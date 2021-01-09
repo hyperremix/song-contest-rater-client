@@ -15,6 +15,8 @@ import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
 import { EmailConfirmationPage } from './containers/EmailConfirmationPage/Loadable';
+import { ForgotPasswordPage } from './containers/ForgotPasswordPage/Loadable';
+import { ForgotPasswordSubmitPage } from './containers/ForgotPasswordSubmitPage/Loadable';
 import { LoginPage } from './containers/LoginPage/Loadable';
 import { NavBar } from './containers/NavBar';
 import { SignUpPage } from './containers/SignUpPage/Loadable';
@@ -46,6 +48,12 @@ export function App() {
             exact
             path="/emailconfirmation"
             component={EmailConfirmationPage}
+          />
+          <Route exact path="/forgotpassword" component={ForgotPasswordPage} />
+          <Route
+            exact
+            path="/forgotpasswordsubmit"
+            component={ForgotPasswordSubmitPage}
           />
           <Route exact path="/acts" component={ActsPage} />
           <Route component={NotFoundPage} />

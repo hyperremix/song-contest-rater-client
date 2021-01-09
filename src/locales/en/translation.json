@@ -64,7 +64,9 @@
     "firstname": "First Name",
     "lastname": "Last Name",
     "initialSignInHeader": "Congratulations!",
-    "initialSignInDescription": "You successfully created an account. Sign in using your credentials."
+    "initialSignInDescription": "You successfully created an account. Sign in using your credentials.",
+    "passwordResetHeader": "Congratulations!",
+    "passwordResetDescription": "You successfully changed your password. Sign in using your credentials."
   },
   "signUpPage": {
     "title": "Sign Up",
@@ -80,5 +82,21 @@
     "confirm": "Confirm",
     "description": "You just received an email containing your confirmation code. Enter the code below to activate your account.",
     "descriptionHeader": "Almost there..."
+  },
+  "forgotPasswordPage": {
+    "title": "Password Reset",
+    "passwordReset": "Password Reset",
+    "resetPasswordButton": "Reset Password",
+    "descriptionHeader": "Password Forgotten?",
+    "description": "No problem! Just enter your email below to get started with resetting the password."
+  },
+  "forgotPasswordSubmitPage": {
+    "title": "Change Password",
+    "forgotPasswordSubmit": "Change Password",
+    "code": "Code",
+    "submit": "Change Password",
+    "togglePasswordVisibility": "toggle password visibility",
+    "descriptionHeader": "Almost there...",
+    "description": "You just received an email containing your reset code. Enter the code along with a new password below in order to change your password."
   }
 }
