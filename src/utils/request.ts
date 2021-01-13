@@ -1,13 +1,6 @@
 import Auth, { CognitoUser } from '@aws-amplify/auth';
+import { RequestOptions, ResponseError } from './types';
 
-export class ResponseError extends Error {
-  public response: Response;
-
-  constructor(response: Response) {
-    super(response.statusText);
-    this.response = response;
-  }
-}
 /**
  * Parses the JSON returned by a network request
  *
@@ -15,12 +8,12 @@ export class ResponseError extends Error {
  *
  * @return {object}          The parsed JSON from the request
  */
-function parseJSON(response: Response): Promise<any> {
+const parseJSON = (response: Response): Promise<any> => {
   if (response.status === 204 || response.status === 205) {
     return Promise.resolve(null);
   }
   return response.json();
-}
+};
 
 /**
  * Checks if a network request came back fine, and throws an error if not
@@ -29,31 +22,57 @@ function parseJSON(response: Response): Promise<any> {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-function checkStatus(response: Response): Response {
+const checkStatus = (response: Response): Response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
   throw new ResponseError(response);
-}
+};
 
-async function addAuthHeader(
-  options?: RequestInit,
-): Promise<RequestInit | undefined> {
-  if (!options) {
-    return options;
+const getRequestInit = async (
+  options?: RequestOptions,
+): Promise<RequestInit> => {
+  let init: RequestInit = {};
+
+  const token = await getUserIdToken();
+  if (token) {
+    init = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
   }
 
-  const user: CognitoUser = await Auth.currentAuthenticatedUser();
-  const token = user.getSignInUserSession()?.getIdToken().getJwtToken();
-  return {
-    ...options,
-    headers: {
-      ...options.headers,
-      Authorization: `Bearer ${token}`,
-    },
-  };
-}
+  if (options?.method) {
+    init = {
+      ...init,
+      method: options.method.toString(),
+    };
+  }
+
+  if (options?.body) {
+    init = {
+      ...init,
+      headers: {
+        ...init.headers,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(options.body),
+    };
+  }
+
+  return init;
+};
+
+const getUserIdToken = async (): Promise<string> => {
+  try {
+    const user: CognitoUser = await Auth.currentAuthenticatedUser();
+    return user.getSignInUserSession()?.getIdToken().getJwtToken() ?? '';
+  } catch (error) {
+    return '';
+  }
+};
 
 /**
  * Requests a URL, returning a promise
@@ -65,10 +84,10 @@ async function addAuthHeader(
  */
 export async function request(
   url: string,
-  options?: RequestInit,
+  options?: RequestOptions,
 ): Promise<{} | { err: ResponseError }> {
-  const optionsWithAuth = await addAuthHeader(options);
-  const fetchResponse = await fetch(url, optionsWithAuth);
+  const requestInit = await getRequestInit(options);
+  const fetchResponse = await fetch(url, requestInit);
   const response = checkStatus(fetchResponse);
   return await parseJSON(response);
 }
