@@ -6,7 +6,6 @@ import { ContainerState, LoginAction } from './types';
 export const initialState: ContainerState = {
   loading: false,
   error: null,
-  email: null,
 };
 
 const loginPageSlice = createSlice({
@@ -17,9 +16,8 @@ const loginPageSlice = createSlice({
       clearState(state);
       state.loading = true;
     },
-    loginSuccess(state, action: PayloadAction<string>) {
+    loginSuccess(state, _: PayloadAction<void>) {
       clearState(state);
-      state.email = action.payload;
     },
     loginFailed(state, action: PayloadAction<any>) {
       clearState(state);
@@ -31,7 +29,6 @@ const loginPageSlice = createSlice({
 const clearState = (state: ContainerState) => {
   state.loading = false;
   state.error = null;
-  state.email = null;
 };
 
 export const {

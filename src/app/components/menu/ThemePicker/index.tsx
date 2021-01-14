@@ -8,7 +8,8 @@ import { Switch, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTheme, selectThemeKey } from 'styles/theme/slice';
+import { selectThemeKey } from 'styles/theme/selectors';
+import { themeActions } from 'styles/theme/slice';
 import { saveTheme } from 'styles/theme/utils';
 import { messages } from './messages';
 
@@ -20,7 +21,7 @@ export function ThemePicker() {
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     saveTheme(event.target.checked);
-    dispatch(changeTheme(event.target.checked));
+    dispatch(themeActions.changeTheme(event.target.checked));
   };
 
   return (

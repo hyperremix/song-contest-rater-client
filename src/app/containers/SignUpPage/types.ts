@@ -4,9 +4,6 @@ import { History } from 'history';
 export interface SignUpPageState {
   loading: boolean;
   error: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  email: string | null;
 }
 
 export type ContainerState = SignUpPageState;

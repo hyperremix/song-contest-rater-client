@@ -5,6 +5,7 @@ import { ForgotPasswordPageState } from 'app/containers/ForgotPasswordPage/types
 import { ForgotPasswordSubmitPageState } from 'app/containers/ForgotPasswordSubmitPage/types';
 import { LoginPageState } from 'app/containers/LoginPage/types';
 import { SignUpPageState } from 'app/containers/SignUpPage/types';
+import { SessionState } from 'session/types';
 import { ThemeState } from 'styles/theme/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
@@ -14,6 +15,7 @@ import { ThemeState } from 'styles/theme/types';
 */
 export interface RootState {
   theme?: ThemeState;
+  session?: SessionState;
   actsPage?: ActsPageState;
   competitionListPage?: CompetitionListPageState;
   loginPage?: LoginPageState;

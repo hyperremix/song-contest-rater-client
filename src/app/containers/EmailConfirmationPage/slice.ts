@@ -6,7 +6,6 @@ import { ContainerState, EmailConfirmationAction } from './types';
 export const initialState: ContainerState = {
   loading: false,
   error: null,
-  code: null,
 };
 
 const emailConfirmationPageSlice = createSlice({
@@ -30,7 +29,6 @@ const emailConfirmationPageSlice = createSlice({
 const clearState = (state: ContainerState) => {
   state.loading = false;
   state.error = null;
-  state.code = null;
 };
 
 export const {

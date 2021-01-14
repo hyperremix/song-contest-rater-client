@@ -15,13 +15,7 @@ export function* signUp({
       method: HttpMethod.POST,
       body: { firstname, lastname, email },
     });
-    yield put(
-      signUpPageActions.signUpSuccess({
-        firstname,
-        lastname,
-        email,
-      }),
-    );
+    yield put(signUpPageActions.signUpSuccess());
     history.push(`/emailconfirmation?email=${email}`);
   } catch (err) {
     yield put(signUpPageActions.signUpFailed(err?.message));

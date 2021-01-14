@@ -4,7 +4,6 @@ import { History } from 'history';
 export interface EmailConfirmationPageState {
   loading: boolean;
   error: string | null;
-  code: string | null;
 }
 
 export type ContainerState = EmailConfirmationPageState;

@@ -8,9 +8,14 @@
 
 import { Container } from '@material-ui/core';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { tryGetUser } from 'session/saga';
+import { reducer, sessionActions, sliceKey } from 'session/slice';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
@@ -22,7 +27,19 @@ import { NavBar } from './containers/NavBar';
 import { SignUpPage } from './containers/SignUpPage/Loadable';
 
 export function App() {
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: tryGetUser });
+  const dispatch = useDispatch();
   const { i18n } = useTranslation();
+
+  const useEffectOnMount = (effect: React.EffectCallback) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect, []);
+  };
+
+  useEffectOnMount(() => {
+    dispatch(sessionActions.tryGetUser());
+  });
 
   return (
     <BrowserRouter>

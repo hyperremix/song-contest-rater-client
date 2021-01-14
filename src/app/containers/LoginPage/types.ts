@@ -4,7 +4,6 @@ import { History } from 'history';
 export interface LoginPageState {
   loading: boolean;
   error: string | null;
-  email: string | null;
 }
 
 export type ContainerState = LoginPageState;

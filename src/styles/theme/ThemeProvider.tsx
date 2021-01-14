@@ -2,10 +2,11 @@ import { ThemeProvider as OriginalThemeProvider } from '@material-ui/core/styles
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
-import { reducer, selectTheme, themeSliceKey } from './slice';
+import { selectTheme } from './selectors';
+import { reducer, sliceKey } from './slice';
 
 export const ThemeProvider = (props: { children: React.ReactChild }) => {
-  useInjectReducer({ key: themeSliceKey, reducer: reducer });
+  useInjectReducer({ key: sliceKey, reducer: reducer });
 
   const theme = useSelector(selectTheme);
   return (

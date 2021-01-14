@@ -6,9 +6,6 @@ import { ContainerState, SignUpAction } from './types';
 export const initialState: ContainerState = {
   loading: false,
   error: null,
-  firstname: null,
-  lastname: null,
-  email: null,
 };
 
 const signUpPageSlice = createSlice({
@@ -19,18 +16,8 @@ const signUpPageSlice = createSlice({
       clearState(state);
       state.loading = true;
     },
-    signUpSuccess(
-      state,
-      action: PayloadAction<{
-        firstname: string;
-        lastname: string;
-        email: string;
-      }>,
-    ) {
+    signUpSuccess(state, _: PayloadAction<void>) {
       clearState(state);
-      state.firstname = action.payload.firstname;
-      state.lastname = action.payload.lastname;
-      state.email = action.payload.email;
     },
     signUpFailed(state, action: PayloadAction<any>) {
       clearState(state);
@@ -42,9 +29,6 @@ const signUpPageSlice = createSlice({
 const clearState = (state: ContainerState) => {
   state.loading = false;
   state.error = null;
-  state.firstname = null;
-  state.lastname = null;
-  state.email = null;
 };
 
 export const {

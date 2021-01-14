@@ -15,19 +15,19 @@ import {
   Typography,
 } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import * as React from 'react';
+import { AccountNav } from '../../components/general/AccountNav/Loadable';
 import { LanguagePicker } from '../../components/menu/LanguagePicker';
 import { ThemePicker } from '../../components/menu/ThemePicker';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
   title: {
     flexGrow: 1,
   },
-}));
+});
 
 export function NavBar() {
   const classes = useStyles();
@@ -50,9 +50,7 @@ export function NavBar() {
             <Typography variant="h6" className={classes.title}>
               Song Contest Rater
             </Typography>
-            <Button color="inherit" href="/signin">
-              <AccountCircle />
-            </Button>
+            <AccountNav></AccountNav>
             <Button
               color="inherit"
               aria-controls="simple-menu"

@@ -10,5 +10,3 @@ export const selectLoading = createSelector(
 );
 
 export const selectError = createSelector([selectDomain], state => state.error);
-
-export const selectEmail = createSelector([selectDomain], state => state.email);
