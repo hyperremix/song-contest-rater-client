@@ -8,6 +8,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUser } from '../../../../session/selectors';
+import { UnstyledLink } from '../UnstyledLink';
 import { messages } from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -27,12 +28,16 @@ export function AccountNav() {
     (user?.lastname?.slice(0, 1) ?? '?');
 
   return isLoggedIn ? (
-    <Button color="inherit" href="/profile">
-      <Avatar className={classes.avatar}>{initials}</Avatar>
+    <Button color="inherit">
+      <UnstyledLink to="/account">
+        <Avatar className={classes.avatar}>{initials}</Avatar>
+      </UnstyledLink>
     </Button>
   ) : (
-    <Button color="inherit" href="/signin">
-      <Typography>{t(...messages.signInLabel)}</Typography>
+    <Button color="inherit">
+      <UnstyledLink to="/signin">
+        <Typography>{t(...messages.signInLabel)}</Typography>
+      </UnstyledLink>
     </Button>
   );
 }

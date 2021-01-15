@@ -15,6 +15,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
+import { UnstyledLink } from 'app/components/general/UnstyledLink';
 import * as React from 'react';
 import { AccountNav } from '../../components/general/AccountNav/Loadable';
 import { LanguagePicker } from '../../components/menu/LanguagePicker';
@@ -48,7 +49,7 @@ export function NavBar() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              Song Contest Rater
+              <UnstyledLink to="/">Song Contest Rater</UnstyledLink>
             </Typography>
             <AccountNav></AccountNav>
             <Button

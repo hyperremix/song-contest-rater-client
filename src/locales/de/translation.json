@@ -98,5 +98,9 @@
     "togglePasswordVisibility": "password zeigen/verstecken",
     "descriptionHeader": "Fast geschafft...",
     "description": "Du hast gerade eine E-Mail mit deinem Reset-Code erhalten. Gib den Code zusammen mit einem neuen Passwort unten ein, um dein Passwort zu ändern."
+  },
+  "accountPage": {
+    "title": "Konto",
+    "updateButton": "Daten Aktualisieren"
   }
 }

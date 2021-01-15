@@ -13,7 +13,6 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Link,
   makeStyles,
   TextField,
   Typography,
@@ -28,6 +27,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from '../../../utils/useFormFields';
+import { RouterLink } from '../../components/general/RouterLink';
 import { messages } from './messages';
 import { trySignUpSaga } from './saga';
 import { selectError, selectLoading } from './selectors';
@@ -222,9 +222,9 @@ export function SignUpPage() {
               </Grid>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/signin" variant="body2">
+                  <RouterLink to="/signin">
                     {t(...messages.existingAccount)}
-                  </Link>
+                  </RouterLink>
                 </Grid>
               </Grid>
             </Grid>

@@ -98,5 +98,9 @@
     "togglePasswordVisibility": "toggle password visibility",
     "descriptionHeader": "Almost there...",
     "description": "You just received an email containing your reset code. Enter the code along with a new password below in order to change your password."
+  },
+  "accountPage": {
+    "title": "Account",
+    "updateButton": "Update Info"
   }
 }

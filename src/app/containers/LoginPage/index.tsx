@@ -11,13 +11,13 @@ import {
   CircularProgress,
   Container,
   Grid,
-  Link,
   makeStyles,
   TextField,
   Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Alert } from '@material-ui/lab';
+import { RouterLink } from 'app/components/general/RouterLink';
 import qs from 'qs';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -191,14 +191,14 @@ export function LoginPage() {
                 </Box>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="/forgotpassword" variant="body2">
+                    <RouterLink to="/forgotpassword">
                       {t(...messages.forgotPasswordLabel)}
-                    </Link>
+                    </RouterLink>
                   </Grid>
                   <Grid item>
-                    <Link href="/signup" variant="body2">
+                    <RouterLink to="/signup">
                       {t(...messages.registerLabel)}
-                    </Link>
+                    </RouterLink>
                   </Grid>
                 </Grid>
               </Grid>

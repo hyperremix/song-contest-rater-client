@@ -17,6 +17,7 @@ import { tryGetUser } from 'session/saga';
 import { reducer, sessionActions, sliceKey } from 'session/slice';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
+import { AccountPage } from './containers/AccountPage/Loadable';
 import { ActsPage } from './containers/ActsPage/Loadable';
 import { CompetitionListPage } from './containers/CompetitionListPage/Loadable';
 import { EmailConfirmationPage } from './containers/EmailConfirmationPage/Loadable';
@@ -72,6 +73,7 @@ export function App() {
             path="/forgotpasswordsubmit"
             component={ForgotPasswordSubmitPage}
           />
+          <Route exact path="/account" component={AccountPage} />
           <Route exact path="/acts" component={ActsPage} />
           <Route component={NotFoundPage} />
         </Switch>

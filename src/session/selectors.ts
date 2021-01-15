@@ -13,3 +13,10 @@ export const selectUser = createSelector(
   [selectDomain],
   session => session.user,
 );
+
+export const selectLoading = createSelector(
+  [selectDomain],
+  state => state.loading,
+);
+
+export const selectError = createSelector([selectDomain], state => state.error);
