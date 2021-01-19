@@ -6,6 +6,7 @@
 
 import {
   Avatar,
+  Badge,
   Box,
   Button,
   CircularProgress,
@@ -15,9 +16,11 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import { Email } from '@material-ui/icons';
+import { Edit, Email } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
 import * as React from 'react';
+import { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +33,7 @@ import {
   selectLoading,
   selectUser,
 } from '../../../session/selectors';
+import { uploadAvatar } from './avatar-api.client';
 import { messages } from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +41,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(3),
     width: theme.spacing(30),
     height: theme.spacing(30),
+  },
+  avatarEdit: {
+    backgroundColor: theme.palette.secondary.main,
   },
   emailContainer: {
     marginTop: theme.spacing(1),
@@ -90,6 +97,29 @@ export function AccountPage() {
     }
   };
 
+  const userId = user?.id;
+  const [{ userAvatarUrl, avatarLoading }, setUserAvatarUrl] = useState({
+    userAvatarUrl: user?.avatarUrl,
+    avatarLoading: false,
+  });
+
+  const onDrop = useCallback(
+    async (files: File[]) => {
+      setUserAvatarUrl({ userAvatarUrl: undefined, avatarLoading: true });
+      const file = files[0];
+      await uploadAvatar(userId, file, file.type);
+      setUserAvatarUrl({
+        userAvatarUrl: URL.createObjectURL(file),
+        avatarLoading: false,
+      });
+    },
+    [userId, setUserAvatarUrl],
+  );
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/jpeg, image/png, image/svg+xml',
+  });
+
   return (
     <>
       <Helmet>
@@ -106,7 +136,35 @@ export function AccountPage() {
               alignItems="center"
             >
               <Grid item xs={12}>
-                <Avatar className={classes.avatar}></Avatar>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <Badge
+                    overlap="circle"
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    badgeContent={
+                      <Avatar className={classes.avatarEdit}>
+                        <Edit />
+                      </Avatar>
+                    }
+                  >
+                    {avatarLoading ? (
+                      <Grid
+                        className={classes.avatar}
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                      >
+                        <CircularProgress size={24} />
+                      </Grid>
+                    ) : (
+                      <Avatar className={classes.avatar} src={userAvatarUrl} />
+                    )}
+                  </Badge>
+                </div>
               </Grid>
             </Grid>
 

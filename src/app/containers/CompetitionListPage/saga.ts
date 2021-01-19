@@ -4,10 +4,7 @@ import { competitionListPageActions } from './slice';
 
 export function* getCompetitions() {
   try {
-    const competitions = yield call(
-      request,
-      `${process.env.REACT_APP_API_URL}/competitions`,
-    );
+    const competitions = yield call(request, '/competitions');
     yield put(competitionListPageActions.competitionsLoaded(competitions));
   } catch (err) {
     yield put(competitionListPageActions.competitionsError(err));

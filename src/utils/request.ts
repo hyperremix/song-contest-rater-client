@@ -82,12 +82,15 @@ const getUserIdToken = async (): Promise<string> => {
  *
  * @return {object}           The response data
  */
-export async function request(
+export const request = async <T>(
   url: string,
   options?: RequestOptions,
-): Promise<{} | { err: ResponseError }> {
+): Promise<T> => {
   const requestInit = await getRequestInit(options);
-  const fetchResponse = await fetch(url, requestInit);
+  const fetchResponse = await fetch(
+    `${process.env.REACT_APP_API_URL}${url}`,
+    requestInit,
+  );
   const response = checkStatus(fetchResponse);
   return await parseJSON(response);
-}
+};

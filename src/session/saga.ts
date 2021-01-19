@@ -12,10 +12,7 @@ export function* getUser(_: PayloadAction<void>) {
   try {
     const userInfo = yield call([Auth, 'currentAuthenticatedUser']);
     const userId = getUuidByString(userInfo.attributes.email);
-    const user = yield call(
-      request,
-      `${process.env.REACT_APP_API_URL}/users/${userId}`,
-    );
+    const user = yield call(request, `/users/${userId}`);
     yield put(sessionActions.getUserSuccess(user));
   } catch (err) {
     yield put(sessionActions.getUserFailed(err));
@@ -36,14 +33,10 @@ export function* updateUser({
       firstname,
       lastname,
     };
-    const responseUser = yield call(
-      request,
-      `${process.env.REACT_APP_API_URL}/users/${user.id}`,
-      {
-        method: HttpMethod.PUT,
-        body: user,
-      },
-    );
+    const responseUser = yield call(request, `/users/${user.id}`, {
+      method: HttpMethod.PUT,
+      body: user,
+    });
     yield put(sessionActions.updateUserSuccess(responseUser));
   } catch (err) {
     yield put(sessionActions.updateUserFailed(err));

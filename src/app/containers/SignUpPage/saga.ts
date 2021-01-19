@@ -11,7 +11,7 @@ export function* signUp({
 }: PayloadAction<SignUpAction>) {
   try {
     yield call([Auth, 'signUp'], email, password);
-    yield call(request, `${process.env.REACT_APP_API_URL}/users`, {
+    yield call(request, '/users', {
       method: HttpMethod.POST,
       body: { firstname, lastname, email },
     });
