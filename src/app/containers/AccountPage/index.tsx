@@ -18,13 +18,14 @@ import {
 import { Edit, Email } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
 import * as React from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { sessionSaga } from 'session/saga';
 import {
+  selectAvatarLoading,
   selectError,
   selectGetLoading,
   selectUpdateLoading,
@@ -34,7 +35,6 @@ import { reducer, sessionActions, sliceKey } from 'session/slice';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from 'utils/useFormFields';
 import { SubmitButton } from '../../components/general/SubmitButton/Loadable';
-import { uploadAvatar } from './avatar-api.client';
 import { messages } from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -67,6 +67,7 @@ export function AccountPage() {
   const user = useSelector(selectUser);
   const isGetLoading = useSelector(selectGetLoading);
   const isUpdateLoading = useSelector(selectUpdateLoading);
+  const isAvatarLoading = useSelector(selectAvatarLoading);
   const error = useSelector(selectError);
 
   const [{ firstname, lastname }, handleFieldChange] = useFormFields({
@@ -87,23 +88,11 @@ export function AccountPage() {
     );
   };
 
-  const userId = user?.id;
-  const [{ userAvatarUrl, avatarLoading }, setUserAvatarUrl] = useState({
-    userAvatarUrl: user?.avatarUrl,
-    avatarLoading: false,
-  });
-
   const onDrop = useCallback(
     async (files: File[]) => {
-      setUserAvatarUrl({ userAvatarUrl: undefined, avatarLoading: true });
-      const file = files[0];
-      await uploadAvatar(userId, file, file.type);
-      setUserAvatarUrl({
-        userAvatarUrl: URL.createObjectURL(file),
-        avatarLoading: false,
-      });
+      dispatch(sessionActions.tryUpdateAvatar({ file: files[0] }));
     },
-    [userId, setUserAvatarUrl],
+    [dispatch],
   );
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -143,7 +132,7 @@ export function AccountPage() {
                         </Avatar>
                       }
                     >
-                      {avatarLoading ? (
+                      {isAvatarLoading ? (
                         <Grid
                           className={classes.avatar}
                           container
@@ -156,7 +145,7 @@ export function AccountPage() {
                       ) : (
                         <Avatar
                           className={classes.avatar}
-                          src={userAvatarUrl}
+                          src={user?.avatarUrl}
                         />
                       )}
                     </Badge>

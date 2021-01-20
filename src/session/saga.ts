@@ -6,7 +6,7 @@ import { HttpMethod } from 'utils/types';
 import getUuidByString from 'uuid-by-string';
 import { selectUser } from './selectors';
 import { sessionActions } from './slice';
-import { UpdateUserAction } from './types';
+import { UpdateAvatarAction, UpdateUserAction } from './types';
 
 export function* getUser(_: PayloadAction<void>) {
   try {
@@ -39,7 +39,30 @@ export function* updateUser({
   }
 }
 
+export function* updateAvatar({
+  payload: { file },
+}: PayloadAction<UpdateAvatarAction>) {
+  try {
+    let user = yield select(selectUser);
+    const { signedUrl } = yield call(request, `/users/${user.id}/avatar`, {
+      method: HttpMethod.POST,
+      body: { contentType: file.type },
+    });
+    yield call(fetch, signedUrl, {
+      method: HttpMethod.PUT,
+      body: file,
+      headers: {
+        'Content-Type': file.type,
+      },
+    });
+    yield put(sessionActions.updateAvatarSuccess(URL.createObjectURL(file)));
+  } catch (err) {
+    yield put(sessionActions.updateAvatarFailed(err));
+  }
+}
+
 export function* sessionSaga() {
   yield takeEvery(sessionActions.tryGetUser.type, getUser);
   yield takeEvery(sessionActions.tryUpdateUser.type, updateUser);
+  yield takeEvery(sessionActions.tryUpdateAvatar.type, updateAvatar);
 }

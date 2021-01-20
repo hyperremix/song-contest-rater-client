@@ -6,9 +6,14 @@ export interface SessionState {
   getLoading: boolean;
   updateLoading: boolean;
   error: string | null;
+  avatarLoading: boolean;
 }
 
 export interface UpdateUserAction {
   firstname: string;
   lastname: string;
+}
+
+export interface UpdateAvatarAction {
+  file: File;
 }

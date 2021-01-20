@@ -24,4 +24,9 @@ export const selectUpdateLoading = createSelector(
   state => state.updateLoading,
 );
 
+export const selectAvatarLoading = createSelector(
+  [selectDomain],
+  state => state.avatarLoading,
+);
+
 export const selectError = createSelector([selectDomain], state => state.error);
