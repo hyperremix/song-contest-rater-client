@@ -6,7 +6,8 @@ export const initialState: SessionState = {
   user: null,
   isLoggedIn: false,
   error: null,
-  loading: false,
+  getLoading: false,
+  updateLoading: false,
 };
 
 const sessionSlice = createSlice({
@@ -15,7 +16,7 @@ const sessionSlice = createSlice({
   reducers: {
     tryGetUser(state, _: PayloadAction<void>) {
       clearState(state);
-      state.loading = true;
+      state.getLoading = true;
     },
     getUserSuccess(state, action: PayloadAction<User>) {
       clearState(state);
@@ -27,23 +28,22 @@ const sessionSlice = createSlice({
       state.error = action.payload;
     },
     tryUpdateUser(state, _: PayloadAction<UpdateUserAction>) {
-      state.loading = true;
+      state.updateLoading = true;
     },
     updateUserSuccess(state, action: PayloadAction<User>) {
-      state.loading = false;
+      state.updateLoading = false;
       state.error = null;
       state.user = action.payload;
     },
     updateUserFailed(state, action: PayloadAction<string>) {
+      state.updateLoading = false;
       state.error = action.payload;
     },
   },
 });
 
 const clearState = (state: SessionState) => {
-  state.user = null;
-  state.isLoggedIn = false;
-  state.loading = false;
+  state.getLoading = false;
   state.error = null;
 };
 

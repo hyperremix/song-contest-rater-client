@@ -14,9 +14,14 @@ export const selectUser = createSelector(
   session => session.user,
 );
 
-export const selectLoading = createSelector(
+export const selectGetLoading = createSelector(
   [selectDomain],
-  state => state.loading,
+  state => state.getLoading,
+);
+
+export const selectUpdateLoading = createSelector(
+  [selectDomain],
+  state => state.updateLoading,
 );
 
 export const selectError = createSelector([selectDomain], state => state.error);

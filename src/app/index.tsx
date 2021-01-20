@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { tryGetUser } from 'session/saga';
+import { sessionSaga } from 'session/saga';
 import { reducer, sessionActions, sliceKey } from 'session/slice';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { NotFoundPage } from './components/general/NotFoundPage/Loadable';
@@ -29,7 +29,7 @@ import { SignUpPage } from './containers/SignUpPage/Loadable';
 
 export function App() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: tryGetUser });
+  useInjectSaga({ key: sliceKey, saga: sessionSaga });
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
 

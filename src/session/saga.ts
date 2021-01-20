@@ -19,10 +19,6 @@ export function* getUser(_: PayloadAction<void>) {
   }
 }
 
-export function* tryGetUser() {
-  yield takeEvery(sessionActions.tryGetUser.type, getUser);
-}
-
 export function* updateUser({
   payload: { firstname, lastname },
 }: PayloadAction<UpdateUserAction>) {
@@ -43,6 +39,7 @@ export function* updateUser({
   }
 }
 
-export function* tryUpdateUser() {
+export function* sessionSaga() {
+  yield takeEvery(sessionActions.tryGetUser.type, getUser);
   yield takeEvery(sessionActions.tryUpdateUser.type, updateUser);
 }

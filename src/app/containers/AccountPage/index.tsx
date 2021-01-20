@@ -8,7 +8,6 @@ import {
   Avatar,
   Badge,
   Box,
-  Button,
   CircularProgress,
   Container,
   Grid,
@@ -24,15 +23,17 @@ import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { tryUpdateUser } from 'session/saga';
+import { sessionSaga } from 'session/saga';
+import {
+  selectError,
+  selectGetLoading,
+  selectUpdateLoading,
+  selectUser,
+} from 'session/selectors';
 import { reducer, sessionActions, sliceKey } from 'session/slice';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from 'utils/useFormFields';
-import {
-  selectError,
-  selectLoading,
-  selectUser,
-} from '../../../session/selectors';
+import { SubmitButton } from '../../components/general/SubmitButton/Loadable';
 import { uploadAvatar } from './avatar-api.client';
 import { messages } from './messages';
 
@@ -54,27 +55,18 @@ const useStyles = makeStyles(theme => ({
   form: {
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  buttonProgress: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -8,
-    marginLeft: -12,
-  },
 }));
 
 export function AccountPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: tryUpdateUser });
+  useInjectSaga({ key: sliceKey, saga: sessionSaga });
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const classes = useStyles();
 
   const user = useSelector(selectUser);
-  const isLoading = useSelector(selectLoading);
+  const isGetLoading = useSelector(selectGetLoading);
+  const isUpdateLoading = useSelector(selectUpdateLoading);
   const error = useSelector(selectError);
 
   const [{ firstname, lastname }, handleFieldChange] = useFormFields({
@@ -87,14 +79,12 @@ export function AccountPage() {
       evt.preventDefault();
     }
 
-    if (firstname?.trim().length > 0 && lastname?.trim().length > 0) {
-      dispatch(
-        sessionActions.tryUpdateUser({
-          firstname,
-          lastname,
-        }),
-      );
-    }
+    dispatch(
+      sessionActions.tryUpdateUser({
+        firstname: firstname?.trim().length > 0 ? firstname : user?.lastname,
+        lastname: lastname?.trim().length > 0 ? lastname : user?.lastname,
+      }),
+    );
   };
 
   const userId = user?.id;
@@ -127,118 +117,113 @@ export function AccountPage() {
         <meta name="description" content="Description of AccountPage" />
       </Helmet>
       <Container maxWidth="xs">
-        <form className={classes.form} noValidate onSubmit={onSubmitForm}>
-          <Grid container spacing={2}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
+        {isGetLoading ? (
+          <CircularProgress />
+        ) : (
+          <form className={classes.form} noValidate onSubmit={onSubmitForm}>
+            <Grid container spacing={2}>
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+              >
+                <Grid item xs={12}>
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <Badge
+                      overlap="circle"
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                      }}
+                      badgeContent={
+                        <Avatar className={classes.avatarEdit}>
+                          <Edit />
+                        </Avatar>
+                      }
+                    >
+                      {avatarLoading ? (
+                        <Grid
+                          className={classes.avatar}
+                          container
+                          direction="column"
+                          justify="center"
+                          alignItems="center"
+                        >
+                          <CircularProgress size={24} />
+                        </Grid>
+                      ) : (
+                        <Avatar
+                          className={classes.avatar}
+                          src={userAvatarUrl}
+                        />
+                      )}
+                    </Badge>
+                  </div>
+                </Grid>
+              </Grid>
+
               <Grid item xs={12}>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <Badge
-                    overlap="circle"
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'right',
-                    }}
-                    badgeContent={
-                      <Avatar className={classes.avatarEdit}>
-                        <Edit />
-                      </Avatar>
-                    }
-                  >
-                    {avatarLoading ? (
-                      <Grid
-                        className={classes.avatar}
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="center"
-                      >
-                        <CircularProgress size={24} />
-                      </Grid>
-                    ) : (
-                      <Avatar className={classes.avatar} src={userAvatarUrl} />
-                    )}
-                  </Badge>
-                </div>
+                <Box
+                  visibility={error ? 'visible' : 'hidden'}
+                  width="100%"
+                  marginTop={1}
+                >
+                  <Alert variant="filled" severity="error">
+                    {error}
+                  </Alert>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="firstname"
+                  label={t(...messages.firstnameLabel)}
+                  id="firstname"
+                  autoComplete="given-name"
+                  value={firstname}
+                  defaultValue={user?.firstname}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="lastname"
+                  label={t(...messages.lastnameLabel)}
+                  id="lastname"
+                  autoComplete="family-name"
+                  value={lastname}
+                  defaultValue={user?.lastname}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                className={classes.emailContainer}
+              >
+                <Email className={classes.emailIcon} />
+                <Typography component="h1" variant="h6" align="justify">
+                  {`${user?.email}`}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <SubmitButton
+                  isLoading={isUpdateLoading}
+                  buttonText={t(...messages.updateButton)}
+                ></SubmitButton>
               </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <Box
-                visibility={error ? 'visible' : 'hidden'}
-                width="100%"
-                marginTop={1}
-              >
-                <Alert variant="filled" severity="error">
-                  {error}
-                </Alert>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="firstname"
-                label={t(...messages.firstnameLabel)}
-                id="firstname"
-                autoComplete="given-name"
-                value={firstname}
-                onChange={handleFieldChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="lastname"
-                label={t(...messages.lastnameLabel)}
-                id="lastname"
-                autoComplete="family-name"
-                value={lastname}
-                onChange={handleFieldChange}
-              />
-            </Grid>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              className={classes.emailContainer}
-            >
-              <Email className={classes.emailIcon} />
-              <Typography component="h1" variant="h6" align="justify">
-                {`${user?.email}`}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Box>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  disabled={isLoading}
-                  className={classes.submit}
-                >
-                  {t(...messages.updateButton)}
-                </Button>
-                {isLoading && (
-                  <CircularProgress
-                    size={24}
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </Box>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        )}
       </Container>
     </>
   );
