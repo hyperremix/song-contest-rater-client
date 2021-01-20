@@ -7,7 +7,6 @@
 import {
   Avatar,
   Badge,
-  Box,
   CircularProgress,
   Container,
   Grid,
@@ -16,7 +15,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Edit, Email } from '@material-ui/icons';
-import { Alert } from '@material-ui/lab';
+import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar';
 import * as React from 'react';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -114,6 +113,7 @@ export function AccountPage() {
         <meta name="description" content="Description of AccountPage" />
       </Helmet>
       <Container maxWidth="xs">
+        <SimpleSnackbar severity="error" open={!!error} description={error} />
         {isGetLoading ? (
           <CircularProgress />
         ) : (
@@ -159,18 +159,6 @@ export function AccountPage() {
                     </Badge>
                   </div>
                 </Grid>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Box
-                  visibility={error ? 'visible' : 'hidden'}
-                  width="100%"
-                  marginTop={1}
-                >
-                  <Alert variant="filled" severity="error">
-                    {error}
-                  </Alert>
-                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField

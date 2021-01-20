@@ -19,7 +19,7 @@ import {
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Alert } from '@material-ui/lab';
+import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -110,6 +110,7 @@ export function SignUpPage() {
         <meta name="description" content="Description of SignUpPage" />
       </Helmet>
       <Container maxWidth="xs">
+        <SimpleSnackbar severity="error" open={!!error} description={error} />
         <Grid container direction="column" justify="center" alignItems="center">
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -120,17 +121,6 @@ export function SignUpPage() {
 
           <form className={classes.form} noValidate onSubmit={onSubmitForm}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Box
-                  visibility={error ? 'visible' : 'hidden'}
-                  width="100%"
-                  marginTop={1}
-                >
-                  <Alert variant="filled" severity="error">
-                    {error}
-                  </Alert>
-                </Box>
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"

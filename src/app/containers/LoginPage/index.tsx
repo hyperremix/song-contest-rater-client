@@ -16,7 +16,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Alert } from '@material-ui/lab';
 import { RouterLink } from 'app/components/general/RouterLink';
 import qs from 'qs';
 import * as React from 'react';
@@ -26,6 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useFormFields } from '../../../utils/useFormFields';
+import { SimpleSnackbar } from '../../components/general/SimpleSnackbar';
 import { messages } from './messages';
 import { tryLoginSaga } from './saga';
 import { selectError, selectLoading } from './selectors';
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -94,6 +94,19 @@ export function LoginPage() {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <Container maxWidth="xs">
+        <SimpleSnackbar
+          severity="info"
+          open={isInitialSignIn === 'true'}
+          title={t(...messages.initialSignInDescriptionHeader)}
+          description={t(...messages.initialSignInDescription)}
+        />
+        <SimpleSnackbar
+          severity="info"
+          open={isPasswordReset === 'true'}
+          title={t(...messages.passwordResetDescriptionHeader)}
+          description={t(...messages.passwordResetDescription)}
+        />
+        <SimpleSnackbar severity="error" open={!!error} description={error} />
         <Grid container direction="column" justify="center" alignItems="center">
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -104,43 +117,6 @@ export function LoginPage() {
 
           <form className={classes.form} noValidate onSubmit={onSubmitForm}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Box
-                  visibility={error ? 'visible' : 'hidden'}
-                  width="100%"
-                  marginTop={1}
-                >
-                  <Alert variant="filled" severity="error">
-                    {error}
-                  </Alert>
-                </Box>
-              </Grid>
-              {isInitialSignIn === 'true' && (
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h6"
-                    className={classes.descriptionHeader}
-                  >
-                    {t(...messages.initialSignInDescriptionHeader)}
-                  </Typography>
-                  <Typography className={classes.description}>
-                    {t(...messages.initialSignInDescription)}
-                  </Typography>
-                </Grid>
-              )}
-              {isPasswordReset === 'true' && (
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h6"
-                    className={classes.descriptionHeader}
-                  >
-                    {t(...messages.passwordResetDescriptionHeader)}
-                  </Typography>
-                  <Typography className={classes.description}>
-                    {t(...messages.passwordResetDescription)}
-                  </Typography>
-                </Grid>
-              )}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
