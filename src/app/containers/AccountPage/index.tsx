@@ -89,14 +89,22 @@ export function AccountPage() {
   };
 
   const onDrop = useCallback(
-    async (files: File[]) => {
+    (files: File[]) => {
+      if (files.length === 0) {
+        dispatch(
+          sessionActions.updateAvatarFailed(t(...messages.imageTooLargeError)),
+        );
+        return;
+      }
+
       dispatch(sessionActions.tryUpdateAvatar({ file: files[0] }));
     },
-    [dispatch],
+    [dispatch, t],
   );
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/jpeg, image/png, image/svg+xml',
+    maxSize: 2097152,
   });
 
   return (

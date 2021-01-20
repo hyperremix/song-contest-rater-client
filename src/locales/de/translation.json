@@ -101,6 +101,7 @@
   },
   "accountPage": {
     "title": "Konto",
-    "updateButton": "Daten Aktualisieren"
+    "updateButton": "Daten Aktualisieren",
+    "imageTooLargeError": "Es werden nur Bilder bis zu 2 MB unterstützt."
   }
 }

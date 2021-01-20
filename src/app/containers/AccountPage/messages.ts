@@ -11,4 +11,8 @@ export const messages = {
   firstnameLabel: _t(translations.loginPage.firstname, 'First Name'),
   lastnameLabel: _t(translations.loginPage.lastname, 'Last Name'),
   updateButton: _t(translations.accountPage.updateButton, 'Update Info'),
+  imageTooLargeError: _t(
+    translations.accountPage.imageTooLargeError,
+    'Only images up to 2 MB are supported.',
+  ),
 };

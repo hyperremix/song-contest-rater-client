@@ -101,6 +101,7 @@
   },
   "accountPage": {
     "title": "Account",
-    "updateButton": "Update Info"
+    "updateButton": "Update Info",
+    "imageTooLargeError": "Only images up to 2 MB are supported."
   }
 }
