@@ -102,6 +102,7 @@
   "accountPage": {
     "title": "Konto",
     "updateButton": "Daten Aktualisieren",
-    "imageTooLargeError": "Es werden nur Bilder bis zu 2 MB unterstützt."
+    "imageTooLargeError": "Es werden nur Bilder bis zu 2 MB unterstützt.",
+    "useGravatar": "Gravatar verwenden"
   }
 }

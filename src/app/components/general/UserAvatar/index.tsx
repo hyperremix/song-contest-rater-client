@@ -21,16 +21,18 @@ export function UserAvatar({ user }: Props) {
   const classes = useStyles();
 
   const initials =
-    (user?.firstname?.slice(0, 1) ?? '?') +
-    (user?.lastname?.slice(0, 1) ?? '?');
+    getFirstCharacter(user?.firstname) + getFirstCharacter(user?.lastname);
 
   return (
     <Avatar
       alt={`${user?.firstname} ${user?.lastname}`}
       className={classes.avatar}
-      src={user?.avatarUrl}
+      src={user?.useGravatar ? user?.gravatarUrl : user?.avatarUrl}
     >
       {initials}
     </Avatar>
   );
 }
+
+const getFirstCharacter = (name: string | undefined): string =>
+  name ? name.slice(0, 1) : '?';

@@ -102,6 +102,7 @@
   "accountPage": {
     "title": "Account",
     "updateButton": "Update Info",
-    "imageTooLargeError": "Only images up to 2 MB are supported."
+    "imageTooLargeError": "Only images up to 2 MB are supported.",
+    "useGravatar": "Use Gravatar"
   }
 }

@@ -9,11 +9,6 @@ export interface SessionState {
   avatarLoading: boolean;
 }
 
-export interface UpdateUserAction {
-  firstname: string;
-  lastname: string;
-}
-
 export interface UpdateAvatarAction {
   file: File;
 }

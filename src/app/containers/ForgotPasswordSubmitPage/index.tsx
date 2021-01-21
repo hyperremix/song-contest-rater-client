@@ -27,7 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { useFormFields } from '../../../utils/useFormFields';
+import { useFormFields } from '../../../utils/formHelpers';
 import { messages } from './messages';
 import { tryForgotPasswordSubmit } from './saga';
 import { selectError, selectLoading } from './selectors';

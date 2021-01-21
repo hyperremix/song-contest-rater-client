@@ -1,6 +1,6 @@
 import { User } from '@hyperremix/song-contest-rater-model';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SessionState, UpdateAvatarAction, UpdateUserAction } from './types';
+import { SessionState, UpdateAvatarAction } from './types';
 
 export const initialState: SessionState = {
   user: null,
@@ -15,7 +15,7 @@ const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
-    tryGetUser(state, _: PayloadAction<void>) {
+    tryGetUser(state) {
       clearState(state);
       state.getLoading = true;
     },
@@ -28,7 +28,10 @@ const sessionSlice = createSlice({
       clearState(state);
       state.error = action.payload;
     },
-    tryUpdateUser(state, _: PayloadAction<UpdateUserAction>) {
+    editUser(state, action: PayloadAction<User>) {
+      state.user = action.payload;
+    },
+    tryUpdateUser(state) {
       state.updateLoading = true;
     },
     updateUserSuccess(state, action: PayloadAction<User>) {

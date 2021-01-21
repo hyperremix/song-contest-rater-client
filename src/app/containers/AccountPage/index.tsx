@@ -9,15 +9,17 @@ import {
   Badge,
   CircularProgress,
   Container,
+  FormControlLabel,
   Grid,
   makeStyles,
+  Switch,
   TextField,
   Typography,
 } from '@material-ui/core';
 import { Edit, Email } from '@material-ui/icons';
 import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar';
 import * as React from 'react';
-import { useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
@@ -31,8 +33,8 @@ import {
   selectUser,
 } from 'session/selectors';
 import { reducer, sessionActions, sliceKey } from 'session/slice';
+import { onChangeHandler, onSubmitFormHandler } from 'utils/formHelpers';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { useFormFields } from 'utils/useFormFields';
 import { SubmitButton } from '../../components/general/SubmitButton/Loadable';
 import { messages } from './messages';
 
@@ -54,6 +56,9 @@ const useStyles = makeStyles(theme => ({
   form: {
     marginTop: theme.spacing(1),
   },
+  gravatarSwitch: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export function AccountPage() {
@@ -69,23 +74,11 @@ export function AccountPage() {
   const isAvatarLoading = useSelector(selectAvatarLoading);
   const error = useSelector(selectError);
 
-  const [{ firstname, lastname }, handleFieldChange] = useFormFields({
-    firstname: user?.firstname,
-    lastname: user?.lastname,
-  });
+  const handleOnChange = event =>
+    onChangeHandler(user, sessionActions.editUser, dispatch, event);
 
-  const onSubmitForm = (evt?: React.FormEvent<HTMLFormElement>) => {
-    if (evt !== undefined && evt.preventDefault) {
-      evt.preventDefault();
-    }
-
-    dispatch(
-      sessionActions.tryUpdateUser({
-        firstname: firstname?.trim().length > 0 ? firstname : user?.lastname,
-        lastname: lastname?.trim().length > 0 ? lastname : user?.lastname,
-      }),
-    );
-  };
+  const onSubmitForm = (event?: FormEvent<HTMLFormElement>) =>
+    onSubmitFormHandler(dispatch, sessionActions.tryUpdateUser, event);
 
   const onDrop = useCallback(
     (files: File[]) => {
@@ -153,11 +146,39 @@ export function AccountPage() {
                       ) : (
                         <Avatar
                           className={classes.avatar}
-                          src={user?.avatarUrl}
+                          src={
+                            user?.useGravatar
+                              ? `${user?.gravatarUrl}?s=300`
+                              : user?.avatarUrl
+                          }
                         />
                       )}
                     </Badge>
                   </div>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Avatar src="https://s.gravatar.com/avatar/00000000000000000000000000000000?s=80" />
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        required
+                        name="useGravatar"
+                        id="useGravatar"
+                        defaultChecked={user?.useGravatar}
+                        onChange={handleOnChange}
+                        color="primary"
+                      />
+                    }
+                    label={t(...messages.useGravatarLabel)}
+                    className={classes.gravatarSwitch}
+                  />
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -169,9 +190,8 @@ export function AccountPage() {
                   label={t(...messages.firstnameLabel)}
                   id="firstname"
                   autoComplete="given-name"
-                  value={firstname}
                   defaultValue={user?.firstname}
-                  onChange={handleFieldChange}
+                  onChange={handleOnChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -183,22 +203,23 @@ export function AccountPage() {
                   label={t(...messages.lastnameLabel)}
                   id="lastname"
                   autoComplete="family-name"
-                  value={lastname}
                   defaultValue={user?.lastname}
-                  onChange={handleFieldChange}
+                  onChange={handleOnChange}
                 />
               </Grid>
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                className={classes.emailContainer}
-              >
-                <Email className={classes.emailIcon} />
-                <Typography component="h1" variant="h6" align="justify">
-                  {`${user?.email}`}
-                </Typography>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  className={classes.emailContainer}
+                >
+                  <Email className={classes.emailIcon} />
+                  <Typography component="h1" variant="h6" align="justify">
+                    {user?.email}
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid item xs={12}>
                 <SubmitButton

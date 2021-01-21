@@ -15,4 +15,5 @@ export const messages = {
     translations.accountPage.imageTooLargeError,
     'Only images up to 2 MB are supported.',
   ),
+  useGravatarLabel: _t(translations.accountPage.useGravatar, 'Use Gravatar'),
 };

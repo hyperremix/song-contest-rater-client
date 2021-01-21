@@ -26,7 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { useFormFields } from '../../../utils/useFormFields';
+import { useFormFields } from '../../../utils/formHelpers';
 import { RouterLink } from '../../components/general/RouterLink';
 import { messages } from './messages';
 import { trySignUpSaga } from './saga';

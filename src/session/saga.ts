@@ -6,9 +6,9 @@ import { HttpMethod } from 'utils/types';
 import getUuidByString from 'uuid-by-string';
 import { selectUser } from './selectors';
 import { sessionActions } from './slice';
-import { UpdateAvatarAction, UpdateUserAction } from './types';
+import { UpdateAvatarAction } from './types';
 
-export function* getUser(_: PayloadAction<void>) {
+export function* getUser() {
   try {
     const userInfo = yield call([Auth, 'currentAuthenticatedUser']);
     const userId = getUuidByString(userInfo.attributes.email);
@@ -19,16 +19,9 @@ export function* getUser(_: PayloadAction<void>) {
   }
 }
 
-export function* updateUser({
-  payload: { firstname, lastname },
-}: PayloadAction<UpdateUserAction>) {
+export function* updateUser() {
   try {
-    let user = yield select(selectUser);
-    user = {
-      ...user,
-      firstname,
-      lastname,
-    };
+    const user = yield select(selectUser);
     const responseUser = yield call(request, `/users/${user.id}`, {
       method: HttpMethod.PUT,
       body: user,
@@ -43,7 +36,7 @@ export function* updateAvatar({
   payload: { file },
 }: PayloadAction<UpdateAvatarAction>) {
   try {
-    let user = yield select(selectUser);
+    const user = yield select(selectUser);
     const { signedUrl } = yield call(request, `/users/${user.id}/avatar`, {
       method: HttpMethod.POST,
       body: { contentType: file.type },
