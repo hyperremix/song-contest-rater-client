@@ -20,7 +20,9 @@ export function CompetitionList({ header, competitions }: Props) {
         <Typography variant="h2">{header}</Typography>
       </Box>
       {competitions.map(item => (
-        <CompetitionItem key={item.id} competition={item} />
+        <Box marginBottom={1}>
+          <CompetitionItem key={item.id} competition={item} />
+        </Box>
       ))}
     </>
   );

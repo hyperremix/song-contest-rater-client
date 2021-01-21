@@ -5,16 +5,17 @@
  */
 import { Competition } from '@hyperremix/song-contest-rater-model';
 import { Box, Card, Grid, makeStyles, Typography } from '@material-ui/core';
+import { LocationOn, Schedule } from '@material-ui/icons';
+import { SmartDateTime } from 'app/components/general/SmartDateTime';
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SmartDateTime } from '../../general/SmartDateTime';
 
 interface Props {
   competition: Competition;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   card: {
     position: 'relative',
     minWidth: 200,
@@ -30,7 +31,7 @@ const useStyles = makeStyles(() => ({
       bottom: 0,
       zIndex: 1,
       background:
-        'linear-gradient(to top, #000, rgba(0,0,0,0.8) 25%, rgba(0,0,0,0) 50%)',
+        'linear-gradient(345deg, #000, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0) 65%)',
     },
   },
   content: {
@@ -41,7 +42,11 @@ const useStyles = makeStyles(() => ({
     color: 'white',
   },
   country: {
-    marginLeft: '0.5rem',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  dateTimeIcon: {
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -78,50 +83,37 @@ export function CompetitionItem({ competition }: Props) {
           <Box className={classes.content} px={2} paddingBottom={1}>
             <Grid
               container
-              direction="row"
-              justify="space-between"
-              alignItems="stretch"
+              direction="column"
+              justify="center"
+              alignItems="flex-end"
             >
-              <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-              >
+              <Grid item>
                 <Typography variant="h3">
                   {t(`competitionDescriptions.${competition.description}`)}
                 </Typography>
-              </Box>
-              <Box>
-                <Grid
-                  container
-                  direction="column"
-                  justify="space-between"
-                  alignItems="stretch"
-                >
-                  <Box
-                    display="flex"
-                    justifyContent="flex-end"
+              </Grid>
+              <Grid item>
+                <SmartDateTime date={competition.startTime} />
+                <Schedule className={classes.dateTimeIcon} />
+              </Grid>
+              <Grid item>
+                <Box>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
                     alignItems="center"
                   >
-                    <SmartDateTime date={competition.startTime} />
-                  </Box>
-                  <Box>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-end"
-                      alignItems="center"
-                    >
-                      <Typography>
-                        {t(`cities.${competition.cityName}`)}
-                      </Typography>
-                      <Typography variant="h5" className={classes.country}>
-                        {t(`countries.${competition.countryName}`)}
-                      </Typography>
-                    </Grid>
-                  </Box>
-                </Grid>
-              </Box>
+                    <Typography>
+                      {t(`cities.${competition.cityName}`)}
+                    </Typography>
+                    <Typography variant="h5" className={classes.country}>
+                      {t(`countries.${competition.countryName}`)}
+                    </Typography>
+                    <LocationOn />
+                  </Grid>
+                </Box>
+              </Grid>
             </Grid>
           </Box>
         </Card>
