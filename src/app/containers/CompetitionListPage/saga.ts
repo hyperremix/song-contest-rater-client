@@ -1,6 +1,8 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { request } from 'utils/request';
 import { competitionListPageActions } from './slice';
+import { SelectCompetitionAction } from './types';
 
 export function* getCompetitions() {
   try {
@@ -11,9 +13,16 @@ export function* getCompetitions() {
   }
 }
 
+export function goToActs({
+  payload: { history, id },
+}: PayloadAction<SelectCompetitionAction>) {
+  history.push(`/competitions/${id}`);
+}
+
 export function* competitionListPageSaga() {
   yield takeLatest(
     competitionListPageActions.loadCompetitions.type,
     getCompetitions,
   );
+  yield takeEvery(competitionListPageActions.selectCompetition.type, goToActs);
 }

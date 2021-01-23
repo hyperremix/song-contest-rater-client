@@ -5,6 +5,7 @@
  */
 
 import { CircularProgress, Grid } from '@material-ui/core';
+import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar/Loadable';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -12,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { CompetitionList } from '../../components/competition/CompetitionList/Loadable';
-import { ApiErrorAlert } from '../../components/general/ApiErrorAlert';
+import { getApiError } from '../../components/general/ApiErrorAlert';
 import { messages } from './messages';
 import { competitionListPageSaga } from './saga';
 import {
@@ -54,9 +55,13 @@ export function CompetitionListPage() {
         <meta name="description" content={t(...messages.competitionsTitle)} />
       </Helmet>
       <Grid container spacing={2}>
+        <SimpleSnackbar
+          severity="error"
+          open={!!error}
+          description={getApiError(t, error)}
+        />
         <Grid item xs={12}>
           {isLoading && <CircularProgress />}
-          {error && <ApiErrorAlert error={error} />}
           <CompetitionListWrapper
             header={t(...messages.ongoingCompetitionHeader)}
             competitions={ongoingCompetition}

@@ -5,7 +5,6 @@
  */
 import { Act } from '@hyperremix/song-contest-rater-model';
 import {
-  Box,
   Card,
   CardContent,
   CardMedia,
@@ -18,14 +17,15 @@ interface Props {
   act: Act;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    marginBottom: theme.spacing(2),
   },
   media: {
     minWidth: 140,
   },
-});
+}));
 
 export function ActItem({ act }: Props) {
   const classes = useStyles();
@@ -36,21 +36,19 @@ export function ActItem({ act }: Props) {
 
   return (
     <>
-      <Box m={1}>
-        <Card className={classes.root}>
-          <CardMedia
-            className={classes.media}
-            image={image}
-            title={act.artistName}
-          />
-          <CardContent>
-            <Typography variant="h5" component="h2">
-              {act.songName}
-            </Typography>
-            <Typography>{act.artistName}</Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          image={image}
+          title={act.artistName}
+        />
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            {act.songName}
+          </Typography>
+          <Typography>{act.artistName}</Typography>
+        </CardContent>
+      </Card>
     </>
   );
 }

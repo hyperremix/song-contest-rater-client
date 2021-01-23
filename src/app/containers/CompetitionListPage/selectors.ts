@@ -31,3 +31,8 @@ export const selectOngoingCompetition = createSelector(
   [selectDomain],
   state => state.ongoingCompetition,
 );
+
+export const selectSelectedCompetition = createSelector(
+  [selectDomain],
+  state => state.selectedCompetition,
+);

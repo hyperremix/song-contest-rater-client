@@ -1,7 +1,7 @@
 import { Competition } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { ContainerState } from './types';
+import { ContainerState, SelectCompetitionAction } from './types';
 
 // The initial state of the CompetitionListPage container
 export const initialState: ContainerState = {
@@ -11,6 +11,8 @@ export const initialState: ContainerState = {
   upcomingCompetitions: [],
   nextCompetition: [],
   ongoingCompetition: [],
+  allCompetitions: [],
+  selectedCompetition: null,
 };
 
 const competitionListPageSlice = createSlice({
@@ -33,10 +35,17 @@ const competitionListPageSlice = createSlice({
       state.upcomingCompetitions = upcomingCompetitions;
       state.nextCompetition = nextCompetition;
       state.ongoingCompetition = ongoingCompetition;
+      state.allCompetitions = action.payload;
     },
     competitionsError(state, action: PayloadAction<Error>) {
       clearState(state);
       state.error = action.payload;
+    },
+    selectCompetition(state, action: PayloadAction<SelectCompetitionAction>) {
+      state.selectedCompetition =
+        state.allCompetitions.find(
+          competition => competition.id === action.payload.id,
+        ) ?? null;
     },
   },
 });
@@ -48,6 +57,8 @@ const clearState = (state: ContainerState) => {
   state.upcomingCompetitions = [];
   state.nextCompetition = [];
   state.ongoingCompetition = [];
+  state.allCompetitions = [];
+  state.selectedCompetition = null;
 };
 
 const getPreviousCompetitions = (competitions: Competition[], now: Date) =>

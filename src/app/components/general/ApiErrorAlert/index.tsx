@@ -30,7 +30,10 @@ export function ApiErrorAlert(props: Props) {
   );
 }
 
-export const getApiError = (t: TFunction, error: Error): string => {
+export const getApiError = (
+  t: TFunction,
+  error: Error | null | undefined,
+): string => {
   if (!(error instanceof ResponseError)) {
     return t(...messages.defaultErrorText);
   }

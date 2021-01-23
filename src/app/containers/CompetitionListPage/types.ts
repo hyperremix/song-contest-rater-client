@@ -1,4 +1,5 @@
 import { Competition } from '@hyperremix/song-contest-rater-model';
+import { History } from 'history';
 
 /* --- STATE --- */
 export interface CompetitionListPageState {
@@ -8,6 +9,13 @@ export interface CompetitionListPageState {
   upcomingCompetitions: Competition[];
   nextCompetition: Competition[];
   ongoingCompetition: Competition[];
+  allCompetitions: Competition[];
+  selectedCompetition: Competition | null;
 }
 
 export type ContainerState = CompetitionListPageState;
+
+export interface SelectCompetitionAction {
+  id: string | undefined;
+  history: History<any>;
+}

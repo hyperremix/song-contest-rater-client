@@ -74,7 +74,7 @@ export function App() {
             component={ForgotPasswordSubmitPage}
           />
           <Route exact path="/account" component={AccountPage} />
-          <Route exact path="/acts" component={ActsPage} />
+          <Route exact path="/competitions/:id" component={ActsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>
