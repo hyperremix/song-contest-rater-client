@@ -4,7 +4,14 @@
  *
  */
 import { Competition } from '@hyperremix/song-contest-rater-model';
-import { Box, Card, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  ButtonBase,
+  Card,
+  Grid,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import { LocationOn, Schedule } from '@material-ui/icons';
 import { SmartDateTime } from 'app/components/general/SmartDateTime';
 import { competitionListPageActions } from 'app/containers/CompetitionListPage/slice';
@@ -15,10 +22,16 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 interface Props {
   competition: Competition;
+  isClickable?: boolean;
 }
 
 const useStyles = makeStyles(theme => ({
+  buttonBase: {
+    width: '100%',
+    marginBottom: theme.spacing(1),
+  },
   card: {
+    width: '100%',
     position: 'relative',
     minWidth: 200,
     minHeight: 250,
@@ -35,7 +48,6 @@ const useStyles = makeStyles(theme => ({
       background:
         'linear-gradient(345deg, #000, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0) 65%)',
     },
-    cursor: 'pointer',
   },
   content: {
     position: 'absolute',
@@ -53,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function CompetitionItem({ competition }: Props) {
+export function CompetitionItem({ competition, isClickable }: Props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
@@ -61,21 +73,22 @@ export function CompetitionItem({ competition }: Props) {
 
   const [elevation, setElevation] = useState<number>(1);
 
-  const handleOnMouseOver = () => {
+  const onMouseOver = () => {
     setElevation(15);
   };
 
-  const handleOnMouseOut = () => {
+  const onMouseOut = () => {
     setElevation(1);
   };
 
   const styles = {
     card: {
       backgroundImage: `url(${competition.imageUrl})`,
+      cursor: isClickable ? 'pointer' : 'auto',
     },
   };
 
-  const handleOnClick = () => {
+  const onClick = () => {
     dispatch(
       competitionListPageActions.selectCompetition({
         id: competition.id,
@@ -86,11 +99,11 @@ export function CompetitionItem({ competition }: Props) {
 
   return (
     <>
-      <Box paddingBottom={1}>
+      <ButtonBase className={classes.buttonBase} disableRipple={!isClickable}>
         <Card
-          onMouseOver={handleOnMouseOver}
-          onMouseOut={handleOnMouseOut}
-          onClick={handleOnClick}
+          onMouseOver={isClickable ? onMouseOver : () => {}}
+          onMouseOut={isClickable ? onMouseOut : () => {}}
+          onClick={isClickable ? onClick : () => {}}
           elevation={elevation}
           style={styles.card}
           className={classes.card}
@@ -132,7 +145,7 @@ export function CompetitionItem({ competition }: Props) {
             </Grid>
           </Box>
         </Card>
-      </Box>
+      </ButtonBase>
     </>
   );
 }
