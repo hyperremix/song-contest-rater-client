@@ -18,3 +18,8 @@ export const selectActs = createSelector(
   [selectDomain],
   actsPageState => actsPageState.acts,
 );
+
+export const selectRatings = createSelector(
+  [selectDomain],
+  actsPageState => actsPageState.ratings,
+);

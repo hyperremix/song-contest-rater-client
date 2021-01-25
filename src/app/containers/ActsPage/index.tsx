@@ -17,7 +17,12 @@ import { selectSelectedCompetition } from '../CompetitionListPage/selectors';
 import { ActItem } from './ActItem';
 import { messages } from './messages';
 import { actsPageSaga } from './saga';
-import { selectActs, selectError, selectLoading } from './selectors';
+import {
+  selectActs,
+  selectError,
+  selectLoading,
+  selectRatings,
+} from './selectors';
 import { reducer, sliceKey } from './slice';
 
 export function ActsPage() {
@@ -27,6 +32,7 @@ export function ActsPage() {
 
   const selectedCompetition = useSelector(selectSelectedCompetition);
   const acts = useSelector(selectActs);
+  const ratings = useSelector(selectRatings);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -47,7 +53,14 @@ export function ActsPage() {
           <CompetitionItem competition={selectedCompetition} />
         )}
         <Typography variant="h2">{t(...messages.actsTitle)}</Typography>
-        {!!acts?.length && acts.map(act => <ActItem key={act.id} act={act} />)}
+        {!!acts?.length &&
+          acts.map(act => (
+            <ActItem
+              key={act.id}
+              act={act}
+              ratings={ratings.filter(r => r.actId === act.id)}
+            />
+          ))}
       </Grid>
     </>
   );

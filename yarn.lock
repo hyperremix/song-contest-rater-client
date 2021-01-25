@@ -1802,9 +1802,9 @@
     "@hapi/hoek" "^8.3.0"
 
 "@hyperremix/song-contest-rater-model@^1.1.1":
-  version "1.2.3"
-  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.2.3/f58ec9c9ffdcf8ab3a74fd199fcef0db052a46d8b9811aa0e30b0a75e72752eb#51cba7ba3cf3febfec7a22fbe639b879115b297b"
-  integrity sha512-qWqM3p33/DydoSIoOPjzECq0J7HUfUep/qrNYTHTsD14FdzIjHcC8tbNYJGnQ1IH+PgR85Si4/zjJSDYz8C6ZA==
+  version "1.3.1"
+  resolved "https://npm.pkg.github.com/download/@hyperremix/song-contest-rater-model/1.3.1/a4124353797be0f1320eff3b55391f957828f171fb4917b9d1992bc294c0d66e#6630f2cbcd885ab6b9bf1e679a0943f57c262acc"
+  integrity sha512-L6EIhd3dUKXO5PvuUgIt4oUX9SaRDm/ZDLNWTZ+8kNe1CcqpPwvqDq8nqLumX7ZAEU1YMgOqS+vUQe1kOZ1yeA==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -4603,7 +4603,7 @@ cloneable-readable@^1.0.0:
     process-nextick-args "^2.0.0"
     readable-stream "^2.3.5"
 
-clsx@^1.0.4:
+clsx@1.1.1, clsx@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -6544,6 +6544,11 @@ fb-watchman@^2.0.0:
   integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
   dependencies:
     bser "2.1.1"
+
+fg-loadcss@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/fg-loadcss/-/fg-loadcss-3.1.0.tgz#f7f148dccf8a6899f846a974ed50539880158acb"
+  integrity sha512-UgtXKza8nBUO6UWW4c+MOprRL4W5WbIkzPJafnw6y6f5jhA3FiSZkWz8eXeAeX+mC4A/qq0ByDLiAk6erNARaQ==
 
 figgy-pudding@^3.5.1:
   version "3.5.2"

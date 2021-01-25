@@ -56,6 +56,8 @@
     "@material-ui/lab": "4.0.0-alpha.57",
     "@reduxjs/toolkit": "1.4.0",
     "@types/qs": "6.9.5",
+    "clsx": "1.1.1",
+    "fg-loadcss": "3.1.0",
     "fontfaceobserver": "2.1.0",
     "history": "5.0.0",
     "i18next": "19.7.0",

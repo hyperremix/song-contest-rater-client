@@ -20,6 +20,25 @@ export function* queryActs() {
   }
 }
 
+export function* queryRatings() {
+  try {
+    const selectedCompetition = (yield select(
+      selectSelectedCompetition,
+    )) as Competition;
+    const queryParams = selectedCompetition.ratingIds
+      .map(id => `ids=${id}`)
+      .join('&');
+    const acts = yield call(request, `/ratings?${queryParams}`);
+    yield put(actsPageActions.ratingsLoaded(acts));
+  } catch (err) {
+    yield put(actsPageActions.ratingsError(err));
+  }
+}
+
 export function* actsPageSaga() {
   yield takeEvery(competitionListPageActions.selectCompetition.type, queryActs);
+  yield takeEvery(
+    competitionListPageActions.selectCompetition.type,
+    queryRatings,
+  );
 }
