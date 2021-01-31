@@ -23,3 +23,23 @@ export const selectRatings = createSelector(
   [selectDomain],
   actsPageState => actsPageState.ratings,
 );
+
+export const selectSelectedAct = createSelector(
+  [selectDomain],
+  actsPageState => actsPageState.selectedAct,
+);
+
+export const selectSelectedRating = createSelector(
+  [selectDomain],
+  actsPageState => actsPageState.selectedRating,
+);
+
+export const selectSaveRatingLoading = createSelector(
+  [selectDomain],
+  actsPageState => actsPageState.saveRatingLoading,
+);
+
+export const selectSaveRatingError = createSelector(
+  [selectDomain],
+  actsPageState => actsPageState.saveRatingError,
+);

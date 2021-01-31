@@ -5,23 +5,26 @@
  */
 import { Act, Rating } from '@hyperremix/song-contest-rater-model';
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Collapse,
   Grid,
-  IconButton,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import { ExpandMore, Person } from '@material-ui/icons';
-import clsx from 'clsx';
+import { Person } from '@material-ui/icons';
 import * as React from 'react';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'session/selectors';
 import { RatingChipList } from '../../components/act/RatingChipList/Loadable';
+import { RatingForm } from '../../components/act/RatingForm/Loadable';
+import { messages } from './messages';
+import { selectSelectedAct, selectSelectedRating } from './selectors';
+import { actsPageActions } from './slice';
 
 interface Props {
   act: Act;
@@ -42,31 +45,40 @@ const useStyles = makeStyles(theme => ({
   artist: {
     marginLeft: theme.spacing(0.5),
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+  cardActions: {
+    marginTop: theme.spacing(1),
+    width: '100%',
   },
-  expandOpen: {
-    transform: 'rotate(180deg)',
+  voteButton: {
+    marginLeft: theme.spacing(1),
+  },
+  sliderInput: {
+    marginLeft: theme.spacing(1),
   },
 }));
 
 export function ActItem({ act, ratings }: Props) {
   const classes = useStyles();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const selectedAct = useSelector(selectSelectedAct);
+  const selectedRating = useSelector(selectSelectedRating);
+
+  const expanded = selectedAct?.id === act.id;
 
   const image = act.imageUrl
     ? act.imageUrl
     : `${process.env.PUBLIC_URL}/logo192.png`;
 
-  const [expanded, setExpanded] = useState(false);
-
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    dispatch(
+      actsPageActions.selectAct({
+        id: act.id,
+        userId: user?.id,
+      }),
+    );
   };
 
   return (
@@ -98,23 +110,36 @@ export function ActItem({ act, ratings }: Props) {
           </Grid>
           <Grid item>
             <CardActions disableSpacing>
-              <RatingChipList
-                rating={ratings.find(r => r.userId === user?.id)}
-              />
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
-                })}
-                onClick={handleExpandClick}
-              >
-                <ExpandMore />
-              </IconButton>
+              <Grid container justify="space-between">
+                <Grid item sm={6} className={classes.cardActions}>
+                  <RatingChipList
+                    rating={ratings.find(r => r.userId === user?.id)}
+                  />
+                </Grid>
+                <Grid item sm={6} className={classes.cardActions}>
+                  <Grid container justify="flex-end">
+                    <Button size="small" color="secondary" variant="contained">
+                      {t(...messages.summaryButtonLabel)}
+                    </Button>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      onClick={handleExpandClick}
+                      className={classes.voteButton}
+                      disabled={expanded}
+                    >
+                      {t(...messages.voteButtonLabel)}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
             </CardActions>
           </Grid>
           <Grid item>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                <Typography>!!! Under Construction !!!</Typography>
+                <RatingForm rating={selectedRating} />
               </CardContent>
             </Collapse>
           </Grid>

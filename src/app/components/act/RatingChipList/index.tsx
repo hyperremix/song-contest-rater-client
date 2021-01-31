@@ -7,15 +7,19 @@ import { Rating } from '@hyperremix/song-contest-rater-model';
 import { Grid, makeStyles } from '@material-ui/core';
 import { loadCSS } from 'fg-loadcss';
 import * as React from 'react';
+import { ClothesIcon } from '../../rating/ClothesIcon';
+import { LooksIcon } from '../../rating/LooksIcon';
+import { ShowIcon } from '../../rating/ShowIcon';
+import { SingingIcon } from '../../rating/SingingIcon';
+import { SongIcon } from '../../rating/SongIcon';
 import { RatingChip } from '../RatingChip/Loadable';
-
 interface Props {
   rating?: Rating;
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '300px',
+    width: '250px',
   },
 }));
 
@@ -35,15 +39,11 @@ export function RatingChipList({ rating }: Props) {
 
   return (
     <Grid container justify="space-between" className={classes.root}>
-      <RatingChip iconName="music" rating={rating?.song} width="24px" />
-      <RatingChip
-        iconName="microphone-alt"
-        rating={rating?.singing}
-        width="17px"
-      />
-      <RatingChip iconName="star" rating={rating?.show} width="24px" />
-      <RatingChip iconName="heart" rating={rating?.looks} width="23px" />
-      <RatingChip iconName="tshirt" rating={rating?.clothes} width="27px" />
+      <RatingChip icon={<SongIcon />} rating={rating?.song} />
+      <RatingChip icon={<SingingIcon />} rating={rating?.singing} />
+      <RatingChip icon={<ShowIcon />} rating={rating?.show} />
+      <RatingChip icon={<LooksIcon />} rating={rating?.looks} />
+      <RatingChip icon={<ClothesIcon />} rating={rating?.clothes} />
     </Grid>
   );
 }

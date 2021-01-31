@@ -7,7 +7,11 @@
     "someThing": "default value"
   },
   "acts": {
-    "title": "Auftritte"
+    "title": "Auftritte",
+    "voteButton": "Bewerten",
+    "summaryButton": "Zusammenfassung",
+    "cancelButton": "Abbrechen",
+    "saveRatingButton": "Bewertung Speichern"
   },
   "apiError": {
     "notFound": "Die gesuchte Sache wurde nicht gefunden.",

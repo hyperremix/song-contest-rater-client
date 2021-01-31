@@ -7,11 +7,6 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-  actsTitle: _t(translations.acts.title, 'Acts'),
-  emptyListErrorText: _t(
-    translations.apiError.emptyList,
-    'There are no entries of this type yet.',
-  ),
-  voteButtonLabel: _t(translations.acts.voteButton, 'Rate'),
-  summaryButtonLabel: _t(translations.acts.summaryButton, 'Summary'),
+  cancelButtonLabel: _t(translations.acts.cancelButton, 'Cancel'),
+  saveRatingButtonLabel: _t(translations.acts.saveRatingButton, 'Save Rating'),
 };
