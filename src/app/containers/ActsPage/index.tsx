@@ -22,6 +22,7 @@ import {
   selectError,
   selectLoading,
   selectRatings,
+  selectUsers,
 } from './selectors';
 import { reducer, sliceKey } from './slice';
 
@@ -33,8 +34,21 @@ export function ActsPage() {
   const selectedCompetition = useSelector(selectSelectedCompetition);
   const acts = useSelector(selectActs);
   const ratings = useSelector(selectRatings);
+  const users = useSelector(selectUsers);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
+
+  const actUserRatings = new Map(
+    acts.map(act => [
+      act.id,
+      ratings
+        .filter(rating => rating.actId === act.id)
+        .map(rating => ({
+          rating,
+          user: users.find(user => user.id === rating.userId),
+        })),
+    ]),
+  );
 
   return (
     <>
@@ -58,7 +72,7 @@ export function ActsPage() {
             <ActItem
               key={act.id}
               act={act}
-              ratings={ratings.filter(r => r.actId === act.id)}
+              userRatings={actUserRatings.get(act.id) ?? []}
             />
           ))}
       </Grid>

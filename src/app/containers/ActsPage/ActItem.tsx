@@ -3,32 +3,39 @@
  * ActItem
  *
  */
-import { Act, Rating } from '@hyperremix/song-contest-rater-model';
+import { Act, Rating, User } from '@hyperremix/song-contest-rater-model';
 import {
+  AppBar,
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Collapse,
+  Dialog,
   Grid,
+  IconButton,
   makeStyles,
+  Slide,
+  Toolbar,
   Typography,
 } from '@material-ui/core';
-import { Person } from '@material-ui/icons';
+import { TransitionProps } from '@material-ui/core/transitions';
+import { Close, Person } from '@material-ui/icons';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'session/selectors';
 import { RatingChipList } from '../../components/act/RatingChipList/Loadable';
 import { RatingForm } from '../../components/act/RatingForm/Loadable';
+import { UserRatingsDataGrid } from '../../components/act/UserRatingsDataGrid/Loadable';
 import { messages } from './messages';
 import { selectSelectedAct, selectSelectedRating } from './selectors';
 import { actsPageActions } from './slice';
 
 interface Props {
   act: Act;
-  ratings: Rating[];
+  userRatings: { rating: Rating; user?: User }[];
 }
 
 const useStyles = makeStyles(theme => ({
@@ -55,9 +62,23 @@ const useStyles = makeStyles(theme => ({
   sliderInput: {
     marginLeft: theme.spacing(1),
   },
+  dialogAppBar: {
+    position: 'relative',
+  },
+  dialogTitle: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
 }));
 
-export function ActItem({ act, ratings }: Props) {
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export function ActItem({ act, userRatings }: Props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -79,6 +100,16 @@ export function ActItem({ act, ratings }: Props) {
         userId: user?.id,
       }),
     );
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -113,12 +144,19 @@ export function ActItem({ act, ratings }: Props) {
               <Grid container justify="space-between">
                 <Grid item sm={6} className={classes.cardActions}>
                   <RatingChipList
-                    rating={ratings.find(r => r.userId === user?.id)}
+                    rating={
+                      userRatings.find(r => r.user?.id === user?.id)?.rating
+                    }
                   />
                 </Grid>
                 <Grid item sm={6} className={classes.cardActions}>
                   <Grid container justify="flex-end">
-                    <Button size="small" color="secondary" variant="contained">
+                    <Button
+                      size="small"
+                      color="secondary"
+                      variant="contained"
+                      onClick={handleClickOpen}
+                    >
                       {t(...messages.summaryButtonLabel)}
                     </Button>
                     <Button
@@ -144,6 +182,29 @@ export function ActItem({ act, ratings }: Props) {
             </Collapse>
           </Grid>
         </Grid>
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar className={classes.dialogAppBar}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <Close />
+              </IconButton>
+              <Typography variant="h6" className={classes.dialogTitle}>
+                {t(...messages.summaryOverlayTitle)}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <UserRatingsDataGrid userRatings={userRatings} />
+        </Dialog>
       </Card>
     </>
   );

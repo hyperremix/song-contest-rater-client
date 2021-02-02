@@ -5,8 +5,10 @@
  */
 import { Rating } from '@hyperremix/song-contest-rater-model';
 import { Grid, makeStyles } from '@material-ui/core';
+import { Functions } from '@material-ui/icons';
 import { loadCSS } from 'fg-loadcss';
 import * as React from 'react';
+import { ratingSum } from 'utils/ratingSum';
 import { ClothesIcon } from '../../rating/ClothesIcon';
 import { LooksIcon } from '../../rating/LooksIcon';
 import { ShowIcon } from '../../rating/ShowIcon';
@@ -17,11 +19,11 @@ interface Props {
   rating?: Rating;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
-    width: '250px',
+    maxWidth: '400px',
   },
-}));
+});
 
 export function RatingChipList({ rating }: Props) {
   const classes = useStyles();
@@ -44,6 +46,7 @@ export function RatingChipList({ rating }: Props) {
       <RatingChip icon={<ShowIcon />} rating={rating?.show} />
       <RatingChip icon={<LooksIcon />} rating={rating?.looks} />
       <RatingChip icon={<ClothesIcon />} rating={rating?.clothes} />
+      <RatingChip icon={<Functions />} rating={ratingSum(rating)} />
     </Grid>
   );
 }

@@ -14,4 +14,5 @@ export const messages = {
   ),
   voteButtonLabel: _t(translations.acts.voteButton, 'Rate'),
   summaryButtonLabel: _t(translations.acts.summaryButton, 'Summary'),
+  summaryOverlayTitle: _t(translations.acts.summaryOverlayTitle, 'Summary'),
 };

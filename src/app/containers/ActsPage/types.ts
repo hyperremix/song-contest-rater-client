@@ -1,4 +1,4 @@
-import { Act, Rating } from '@hyperremix/song-contest-rater-model';
+import { Act, Rating, User } from '@hyperremix/song-contest-rater-model';
 
 /* --- STATE --- */
 export interface ActsPageState {
@@ -6,6 +6,7 @@ export interface ActsPageState {
   error?: Error | null;
   acts: Act[];
   ratings: Rating[];
+  users: User[];
   selectedAct?: Act | null;
   selectedRating: Rating | null;
   saveRatingLoading: boolean;

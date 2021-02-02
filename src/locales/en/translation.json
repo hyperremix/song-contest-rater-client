@@ -11,7 +11,8 @@
     "voteButton": "Rate",
     "summaryButton": "Summary",
     "cancelButton": "Cancel",
-    "saveRatingButton": "Save Rating"
+    "saveRatingButton": "Save Rating",
+    "summaryOverlayTitle": "Summary"
   },
   "apiError": {
     "notFound": "The thing you were looking for was not found.",

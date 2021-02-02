@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props {
-  user: User | null;
-  size?: number | undefined;
+  user?: User | null;
+  size?: number;
 }
 
 export function UserAvatar({ user, size }: Props) {

@@ -27,11 +27,19 @@ export function* queryRatings() {
     const selectedCompetition = (yield select(
       selectSelectedCompetition,
     )) as Competition;
-    const queryParams = selectedCompetition.ratingIds
+    const ratingsQueryParams = selectedCompetition.ratingIds
       .map(id => `ids=${id}`)
       .join('&');
-    const acts = yield call(request, `/ratings?${queryParams}`);
-    yield put(actsPageActions.ratingsLoaded(acts));
+    const ratings = (yield call(
+      request,
+      `/ratings?${ratingsQueryParams}`,
+    )) as Rating[];
+    const usersQueryParams = ratings
+      .map(rating => `ids=${rating.userId}`)
+      .join('&');
+    const users = yield call(request, `/users?${usersQueryParams}`);
+    yield put(actsPageActions.ratingsLoaded(ratings));
+    yield put(actsPageActions.usersLoaded(users));
   } catch (err) {
     yield put(actsPageActions.ratingsError(err));
   }

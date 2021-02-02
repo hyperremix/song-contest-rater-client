@@ -1,4 +1,4 @@
-import { Act, Rating } from '@hyperremix/song-contest-rater-model';
+import { Act, Rating, User } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState, SelectActAction } from './types';
@@ -7,6 +7,7 @@ import { ContainerState, SelectActAction } from './types';
 export const initialState: ContainerState = {
   acts: [],
   ratings: [],
+  users: [],
   loading: false,
   error: null,
   selectedAct: null,
@@ -31,7 +32,12 @@ const actsPageSlice = createSlice({
       state.ratings = action.payload;
       state.loading = false;
     },
+    usersLoaded(state, action: PayloadAction<User[]>) {
+      state.users = action.payload;
+    },
     ratingsError(state, action: PayloadAction<Error>) {
+      state.ratings = [];
+      state.users = [];
       state.error = action.payload;
       state.loading = false;
     },

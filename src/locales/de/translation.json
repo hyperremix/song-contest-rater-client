@@ -11,7 +11,8 @@
     "voteButton": "Bewerten",
     "summaryButton": "Zusammenfassung",
     "cancelButton": "Abbrechen",
-    "saveRatingButton": "Bewertung Speichern"
+    "saveRatingButton": "Bewertung Speichern",
+    "summaryOverlayTitle": "Zusammenfassung"
   },
   "apiError": {
     "notFound": "Die gesuchte Sache wurde nicht gefunden.",
