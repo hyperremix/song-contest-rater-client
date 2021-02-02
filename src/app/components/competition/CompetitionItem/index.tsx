@@ -14,11 +14,9 @@ import {
 } from '@material-ui/core';
 import { LocationOn, Schedule } from '@material-ui/icons';
 import { SmartDateTime } from 'app/components/general/SmartDateTime';
-import { competitionListPageActions } from 'app/containers/CompetitionListPage/slice';
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 interface Props {
   competition: Competition;
@@ -69,7 +67,6 @@ export function CompetitionItem({ competition, isClickable }: Props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const [elevation, setElevation] = useState<number>(1);
 
@@ -89,12 +86,7 @@ export function CompetitionItem({ competition, isClickable }: Props) {
   };
 
   const onClick = () => {
-    dispatch(
-      competitionListPageActions.selectCompetition({
-        id: competition.id,
-        history,
-      }),
-    );
+    history.push(`/competitions/${competition.id}`);
   };
 
   return (

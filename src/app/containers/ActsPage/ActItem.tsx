@@ -21,14 +21,16 @@ import {
   Typography,
 } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
-import { Close, Person } from '@material-ui/icons';
+import { Close, Person, Replay } from '@material-ui/icons';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { selectUser } from 'session/selectors';
 import { RatingChipList } from '../../components/act/RatingChipList/Loadable';
 import { RatingForm } from '../../components/act/RatingForm/Loadable';
 import { UserRatingsDataGrid } from '../../components/act/UserRatingsDataGrid/Loadable';
+import { competitionListPageActions } from '../CompetitionListPage/slice';
 import { messages } from './messages';
 import { selectSelectedAct, selectSelectedRating } from './selectors';
 import { actsPageActions } from './slice';
@@ -82,6 +84,7 @@ export function ActItem({ act, userRatings }: Props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const pathParams = useParams<{ id: string }>();
 
   const user = useSelector(selectUser);
   const selectedAct = useSelector(selectSelectedAct);
@@ -110,6 +113,10 @@ export function ActItem({ act, userRatings }: Props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleRefresh = () => {
+    dispatch(competitionListPageActions.selectCompetition(pathParams.id));
   };
 
   return (
@@ -190,17 +197,15 @@ export function ActItem({ act, userRatings }: Props) {
         >
           <AppBar className={classes.dialogAppBar}>
             <Toolbar>
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={handleClose}
-                aria-label="close"
-              >
+              <IconButton edge="start" color="inherit" onClick={handleClose}>
                 <Close />
               </IconButton>
               <Typography variant="h6" className={classes.dialogTitle}>
                 {t(...messages.summaryOverlayTitle)}
               </Typography>
+              <IconButton color="inherit" onClick={handleRefresh}>
+                <Replay />
+              </IconButton>
             </Toolbar>
           </AppBar>
           <UserRatingsDataGrid userRatings={userRatings} />

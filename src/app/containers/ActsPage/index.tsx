@@ -8,12 +8,15 @@ import { CircularProgress, Grid, Typography } from '@material-ui/core';
 import { CompetitionItem } from 'app/components/competition/CompetitionItem';
 import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar/Loadable';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { getApiError } from '../../components/general/ApiErrorAlert';
 import { selectSelectedCompetition } from '../CompetitionListPage/selectors';
+import { competitionListPageActions } from '../CompetitionListPage/slice';
 import { ActItem } from './ActItem';
 import { messages } from './messages';
 import { actsPageSaga } from './saga';
@@ -30,6 +33,8 @@ export function ActsPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: actsPageSaga });
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const pathParams = useParams<{ id: string }>();
 
   const selectedCompetition = useSelector(selectSelectedCompetition);
   const acts = useSelector(selectActs);
@@ -49,6 +54,15 @@ export function ActsPage() {
         })),
     ]),
   );
+
+  const useEffectOnMount = (effect: React.EffectCallback) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect, []);
+  };
+
+  useEffectOnMount(() => {
+    dispatch(competitionListPageActions.selectCompetition(pathParams.id));
+  });
 
   return (
     <>
