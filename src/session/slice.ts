@@ -24,7 +24,7 @@ const sessionSlice = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
     },
-    getUserFailed(state, action: PayloadAction<string>) {
+    getUserFailed(state, action: PayloadAction<Error>) {
       clearState(state);
       state.error = action.payload;
     },
@@ -39,7 +39,7 @@ const sessionSlice = createSlice({
       state.error = null;
       state.user = action.payload;
     },
-    updateUserFailed(state, action: PayloadAction<string>) {
+    updateUserFailed(state, action: PayloadAction<Error>) {
       state.updateLoading = false;
       state.error = action.payload;
     },
@@ -51,7 +51,7 @@ const sessionSlice = createSlice({
       state.error = null;
       state.user!.avatarUrl = action.payload;
     },
-    updateAvatarFailed(state, action: PayloadAction<string>) {
+    updateAvatarFailed(state, action: PayloadAction<Error>) {
       state.avatarLoading = false;
       state.error = action.payload;
     },

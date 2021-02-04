@@ -13,7 +13,7 @@ import { SyntheticEvent, useState } from 'react';
 interface Props {
   open: boolean;
   title?: string;
-  description: string | null;
+  description?: string | null;
   severity: 'error' | 'warning' | 'info' | 'success';
 }
 

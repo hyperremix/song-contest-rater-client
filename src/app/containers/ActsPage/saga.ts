@@ -1,4 +1,4 @@
-import { Competition, Rating } from '@hyperremix/song-contest-rater-model';
+import { Act, Competition, Rating } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { request } from 'utils/request';
@@ -12,10 +12,22 @@ export function* queryActs() {
     const selectedCompetition = (yield select(
       selectSelectedCompetition,
     )) as Competition;
+
+    if (!selectedCompetition?.actIds) {
+      yield put(actsPageActions.actsLoaded([]));
+      return;
+    }
+
     const queryParams = selectedCompetition.actIds
       .map(id => `ids=${id}`)
       .join('&');
-    const acts = yield call(request, `/acts?${queryParams}`);
+    const scrambledActs = (yield call(
+      request,
+      `/acts?${queryParams}`,
+    )) as Act[];
+    const acts = [...selectedCompetition.actIds].map(
+      id => scrambledActs.find(act => act.id === id)!,
+    );
     yield put(actsPageActions.actsLoaded(acts));
   } catch (err) {
     yield put(actsPageActions.actsError(err));
@@ -27,6 +39,12 @@ export function* queryRatings() {
     const selectedCompetition = (yield select(
       selectSelectedCompetition,
     )) as Competition;
+
+    if (!selectedCompetition?.ratingIds) {
+      yield put(actsPageActions.actsLoaded([]));
+      return;
+    }
+
     const ratingsQueryParams = selectedCompetition.ratingIds
       .map(id => `ids=${id}`)
       .join('&');

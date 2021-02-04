@@ -5,7 +5,7 @@ export interface SessionState {
   isLoggedIn: boolean;
   getLoading: boolean;
   updateLoading: boolean;
-  error: string | null;
+  error: Error | null;
   avatarLoading: boolean;
 }
 
