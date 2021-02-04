@@ -9,4 +9,9 @@ import { _t } from 'utils/messages';
 export const messages = {
   cancelButtonLabel: _t(translations.acts.cancelButton, 'Cancel'),
   saveRatingButtonLabel: _t(translations.acts.saveRatingButton, 'Save Rating'),
+  songLabel: _t(translations.acts.songLabel, 'Song'),
+  singingLabel: _t(translations.acts.singingLabel, 'Singing'),
+  showLabel: _t(translations.acts.showLabel, 'Show'),
+  looksLabel: _t(translations.acts.looksLabel, 'Looks'),
+  clothesLabel: _t(translations.acts.clothesLabel, 'Clothes'),
 };

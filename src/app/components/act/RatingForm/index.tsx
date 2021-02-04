@@ -125,7 +125,7 @@ export function RatingForm({ rating }: Props) {
     <form noValidate onSubmit={onSubmitForm}>
       <Grid container direction="column">
         <Grid item>
-          <Typography id="input-slider">Song</Typography>
+          <Typography id="input-slider">{t(...messages.songLabel)}</Typography>
           <Grid container alignItems="center" justify="space-between">
             <Grid item xs={2}>
               <SongIcon />
@@ -145,7 +145,9 @@ export function RatingForm({ rating }: Props) {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography id="input-slider">Singing</Typography>
+          <Typography id="input-slider">
+            {t(...messages.singingLabel)}
+          </Typography>
           <Grid container alignItems="center" justify="space-between">
             <Grid item xs={2}>
               <SingingIcon />
@@ -165,7 +167,7 @@ export function RatingForm({ rating }: Props) {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography id="input-slider">Show</Typography>
+          <Typography id="input-slider">{t(...messages.showLabel)}</Typography>
           <Grid container alignItems="center" justify="space-between">
             <Grid item xs={2}>
               <ShowIcon />
@@ -185,7 +187,7 @@ export function RatingForm({ rating }: Props) {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography id="input-slider">Looks</Typography>
+          <Typography id="input-slider">{t(...messages.looksLabel)}</Typography>
           <Grid container alignItems="center" justify="space-between">
             <Grid item xs={2}>
               <LooksIcon />
@@ -205,7 +207,9 @@ export function RatingForm({ rating }: Props) {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography id="input-slider">Clothes</Typography>
+          <Typography id="input-slider">
+            {t(...messages.clothesLabel)}
+          </Typography>
           <Grid container alignItems="center" justify="space-between">
             <Grid item xs={2}>
               <ClothesIcon />

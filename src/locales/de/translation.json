@@ -12,7 +12,12 @@
     "summaryButton": "Zusammenfassung",
     "cancelButton": "Abbrechen",
     "saveRatingButton": "Bewertung Speichern",
-    "summaryOverlayTitle": "Zusammenfassung"
+    "summaryOverlayTitle": "Zusammenfassung",
+    "songLabel": "Song",
+    "singingLabel": "Gesang",
+    "showLabel": "Show",
+    "looksLabel": "Aussehen",
+    "clothesLabel": "Kleidung"
   },
   "apiError": {
     "notFound": "Die gesuchte Sache wurde nicht gefunden.",
