@@ -50,10 +50,10 @@ export const getApiError = (
     case 422:
       return t(...messages.unprocessableEntityErrorText);
     case 500:
-      console.error(JSON.stringify(error));
-      return t(...messages.internalServerErrorText);
+      return `${t(...messages.internalServerErrorText)}\nError: ${
+        error?.message
+      }`;
     default:
-      console.error(JSON.stringify(error));
-      return t(...messages.defaultErrorText);
+      return `${t(...messages.defaultErrorText)}\nError: ${error?.message}`;
   }
 };
