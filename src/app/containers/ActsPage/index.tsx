@@ -71,11 +71,13 @@ export function ActsPage() {
         <meta name="description" content="Description of ActsPage" />
       </Helmet>
       <Grid container direction="column" justify="center" alignItems="stretch">
-        <SimpleSnackbar
-          severity="error"
-          open={!!error}
-          description={getApiError(t, error)}
-        />
+        {error && (
+          <SimpleSnackbar
+            severity="error"
+            open={!!error}
+            description={getApiError(t, error)}
+          />
+        )}
         {isLoading && <CircularProgress />}
         {!!selectedCompetition && (
           <CompetitionItem competition={selectedCompetition} />

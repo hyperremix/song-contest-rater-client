@@ -106,7 +106,9 @@ export function LoginPage() {
           title={t(...messages.passwordResetDescriptionHeader)}
           description={t(...messages.passwordResetDescription)}
         />
-        <SimpleSnackbar severity="error" open={!!error} description={error} />
+        {error && (
+          <SimpleSnackbar severity="error" open={!!error} description={error} />
+        )}
         <Grid container direction="column" justify="center" alignItems="center">
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

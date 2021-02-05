@@ -110,7 +110,9 @@ export function SignUpPage() {
         <meta name="description" content="Description of SignUpPage" />
       </Helmet>
       <Container maxWidth="xs">
-        <SimpleSnackbar severity="error" open={!!error} description={error} />
+        {error && (
+          <SimpleSnackbar severity="error" open={!!error} description={error} />
+        )}
         <Grid container direction="column" justify="center" alignItems="center">
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

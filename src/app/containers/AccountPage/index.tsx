@@ -106,11 +106,13 @@ export function AccountPage() {
         <meta name="description" content="Description of AccountPage" />
       </Helmet>
       <Container maxWidth="xs">
-        <SimpleSnackbar
-          severity="error"
-          open={!!error}
-          description={error?.message}
-        />
+        {error && (
+          <SimpleSnackbar
+            severity="error"
+            open={!!error}
+            description={error?.message}
+          />
+        )}
         {isGetLoading ? (
           <CircularProgress />
         ) : (

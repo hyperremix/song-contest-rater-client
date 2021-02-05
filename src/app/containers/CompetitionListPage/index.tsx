@@ -55,11 +55,13 @@ export function CompetitionListPage() {
         <meta name="description" content={t(...messages.competitionsTitle)} />
       </Helmet>
       <Grid container spacing={2}>
-        <SimpleSnackbar
-          severity="error"
-          open={!!error}
-          description={getApiError(t, error)}
-        />
+        {error && (
+          <SimpleSnackbar
+            severity="error"
+            open={!!error}
+            description={getApiError(t, error)}
+          />
+        )}
         <Grid item xs={12}>
           {isLoading && <CircularProgress />}
           <CompetitionListWrapper
