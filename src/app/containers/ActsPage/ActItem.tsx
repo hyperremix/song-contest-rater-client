@@ -6,11 +6,13 @@
 import { Act, Rating, User } from '@hyperremix/song-contest-rater-model';
 import {
   AppBar,
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  Chip,
   Collapse,
   Dialog,
   Grid,
@@ -19,6 +21,7 @@ import {
   Slide,
   Toolbar,
   Typography,
+  useTheme,
 } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Close, Person, Replay } from '@material-ui/icons';
@@ -27,9 +30,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectUser } from 'session/selectors';
+import { ratingSum } from 'utils/ratingSum';
 import { RatingChipList } from '../../components/act/RatingChipList/Loadable';
 import { RatingForm } from '../../components/act/RatingForm/Loadable';
 import { UserRatingsDataGrid } from '../../components/act/UserRatingsDataGrid/Loadable';
+import { UserAvatarGroup } from '../../components/general/UserAvatarGroup/Loadable';
 import { competitionListPageActions } from '../CompetitionListPage/slice';
 import { messages } from './messages';
 import { selectSelectedAct, selectSelectedRating } from './selectors';
@@ -45,8 +50,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   media: {
-    minWidth: 140,
-    borderBottomRightRadius: theme.spacing(0.5),
+    height: '100%',
+    width: '100%',
+    borderBottomRightRadius: theme.spacing(1),
   },
   mainContent: {
     display: 'flex',
@@ -71,6 +77,21 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  collectiveRating: {
+    backgroundColor: theme.palette.grey[700],
+    borderRadius: theme.spacing(0.5),
+    padding: theme.spacing(1),
+    boxShadow: theme.shadows[3],
+  },
+  actInfoContainer: {
+    height: '100%',
+  },
+  actInfo: {
+    padding: theme.spacing(1.5, 1),
+  },
+  totalRatingChip: {
+    backgroundColor: 'goldenrod',
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(
@@ -85,10 +106,16 @@ export function ActItem({ act, userRatings }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const pathParams = useParams<{ id: string }>();
+  const theme = useTheme();
 
   const user = useSelector(selectUser);
   const selectedAct = useSelector(selectSelectedAct);
   const selectedRating = useSelector(selectSelectedRating);
+
+  const collectiveRating = userRatings.reduce(
+    (sum, userRating) => sum + ratingSum(userRating.rating),
+    0,
+  );
 
   const expanded = selectedAct?.id === act.id;
 
@@ -119,6 +146,12 @@ export function ActItem({ act, userRatings }: Props) {
     dispatch(competitionListPageActions.selectCompetition(pathParams.id));
   };
 
+  const styles = {
+    totalRating: {
+      marginLeft: userRatings.length > 0 ? theme.spacing(2) : 0,
+    },
+  };
+
   return (
     <>
       <Card className={classes.root}>
@@ -129,22 +162,65 @@ export function ActItem({ act, userRatings }: Props) {
           alignItems="stretch"
         >
           <Grid item className={classes.mainContent}>
-            <CardMedia
-              className={classes.media}
-              image={image}
-              title={act.artistName}
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                {act.songName}
-              </Typography>
-              <Grid container>
-                <Person />
-                <Typography className={classes.artist}>
-                  {act.artistName}
-                </Typography>
+            <Grid container justify="space-between">
+              <Grid item sm={7}>
+                <Grid container className={classes.actInfoContainer}>
+                  <Grid item xs={4}>
+                    <CardMedia
+                      className={classes.media}
+                      image={image}
+                      title={act.artistName}
+                    />
+                  </Grid>
+                  <Grid item xs={8} className={classes.actInfo}>
+                    <Grid container>
+                      <Typography variant="h5" component="h2">
+                        {act.songName}
+                      </Typography>
+                      <Grid container>
+                        <Person />
+                        <Typography className={classes.artist}>
+                          {act.artistName}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-            </CardContent>
+              <Grid item>
+                <CardContent>
+                  <Box className={classes.collectiveRating}>
+                    <Grid
+                      container
+                      direction="row"
+                      alignItems="center"
+                      justify="space-between"
+                    >
+                      <Grid item>
+                        <UserAvatarGroup
+                          users={userRatings.map(ur => ur.user)}
+                          max={5}
+                        />
+                      </Grid>
+                      <Grid item style={styles.totalRating}>
+                        <Grid
+                          container
+                          direction="column"
+                          justify="center"
+                          alignItems="center"
+                        >
+                          <Typography>Total</Typography>
+                          <Chip
+                            className={classes.totalRatingChip}
+                            label={collectiveRating}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </CardContent>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
             <CardActions disableSpacing>

@@ -16,9 +16,10 @@ const useStyles = makeStyles(theme => ({
 interface Props {
   user?: User | null;
   size?: number;
+  style?: any;
 }
 
-export function UserAvatar({ user, size }: Props) {
+export function UserAvatar({ user, size, style }: Props) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -29,6 +30,7 @@ export function UserAvatar({ user, size }: Props) {
     avatar: {
       width: theme.spacing(size ?? 5),
       height: theme.spacing(size ?? 5),
+      ...style,
     },
   };
 
