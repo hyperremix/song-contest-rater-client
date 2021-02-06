@@ -31,7 +31,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectUser } from 'session/selectors';
-import { ratingSum } from 'utils/ratingSum';
 import { RatingChipList } from '../../components/act/RatingChipList/Loadable';
 import { RatingForm } from '../../components/act/RatingForm/Loadable';
 import { UserRatingsDataGrid } from '../../components/act/UserRatingsDataGrid/Loadable';
@@ -44,6 +43,7 @@ import { actsPageActions } from './slice';
 interface Props {
   act: Act;
   userRatings: { rating: Rating; user?: User }[];
+  collectiveRating: number;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -102,7 +102,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export function ActItem({ act, userRatings }: Props) {
+export function ActItem({ act, userRatings, collectiveRating }: Props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -112,11 +112,6 @@ export function ActItem({ act, userRatings }: Props) {
   const user = useSelector(selectUser);
   const selectedAct = useSelector(selectSelectedAct);
   const selectedRating = useSelector(selectSelectedRating);
-
-  const collectiveRating = userRatings.reduce(
-    (sum, userRating) => sum + ratingSum(userRating.rating),
-    0,
-  );
 
   const expanded = selectedAct?.id === act.id;
 
