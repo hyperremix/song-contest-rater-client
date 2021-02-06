@@ -47,7 +47,7 @@
     "yesterday": "Gestern",
     "tomorrow": "Morgen",
     "today": "Heute",
-    "last": "Letzen",
+    "last": "Letzten",
     "on": "Am"
   },
   "competitionDescriptions": {
@@ -70,19 +70,19 @@
     "email": "E-Mail Adresse",
     "password": "Passwort",
     "forgotPassword": "Passwort Vergessen?",
-    "register": "Noch kein Konto? Registriere dich!",
+    "register": "Noch kein Konto? Registriere Dich!",
     "firstname": "Vorname",
     "lastname": "Nachname",
     "initialSignInHeader": "Glückwunsch!",
-    "initialSignInDescription": "Du hast ein Konto erfolgreich erstellt. Melde dich mit deinen Anmeldedaten an.",
+    "initialSignInDescription": "Du hast Dein Konto erfolgreich erstellt. Melde Dich mit Deinen Anmeldedaten an.",
     "passwordResetHeader": "Glückwunsch!",
-    "passwordResetDescription": "Du hast dein Passwort erfolgreich geändert. Melde dich mit deinen Anmeldedaten an."
+    "passwordResetDescription": "Du hast Dein Passwort erfolgreich geändert. Melde Dich mit Deinen Anmeldedaten an."
   },
   "signUpPage": {
     "title": "Registrierung",
     "signUp": "Registrierung",
     "existingAccount": "Schon ein Konto? Hier anmelden!",
-    "togglePasswordVisibility": "password zeigen/verstecken",
+    "togglePasswordVisibility": "Passwort zeigen/verstecken",
     "signUpButton": "Registrieren"
   },
   "emailConfirmation": {
@@ -90,7 +90,7 @@
     "emailConfirmation": "E-Mail-Bestätigung",
     "code": "Code",
     "confirm": "Bestätigen",
-    "description": "Du hast gerade eine E-Mail mit deinem Bestätigungscode erhalten. Gib den Code unten ein, um dein Konto zu aktivieren",
+    "description": "Du hast gerade eine E-Mail mit Deinem Bestätigungscode erhalten. Gib den Code unten ein, um Dein Konto zu aktivieren",
     "descriptionHeader": "Fast geschafft..."
   },
   "forgotPasswordPage": {
@@ -98,16 +98,16 @@
     "passwordReset": "Passwort Zurücksetzen",
     "resetPasswordButton": "Passwort Zurücksetzen",
     "descriptionHeader": "Passwort Vergessen?",
-    "description": "Kein Problem! Gib einfach deine E-Mail unten ein, um dein Passwort zurückzusetzen."
+    "description": "Kein Problem! Gib einfach Deine E-Mail unten ein, um Dein Passwort zurückzusetzen."
   },
   "forgotPasswordSubmitPage": {
     "title": "Passwort Ändern",
     "forgotPasswordSubmit": "Passwort Ändern",
     "code": "Code",
     "submit": "Passwort Ändern",
-    "togglePasswordVisibility": "password zeigen/verstecken",
+    "togglePasswordVisibility": "Passwort zeigen/verstecken",
     "descriptionHeader": "Fast geschafft...",
-    "description": "Du hast gerade eine E-Mail mit deinem Reset-Code erhalten. Gib den Code zusammen mit einem neuen Passwort unten ein, um dein Passwort zu ändern."
+    "description": "Du hast gerade eine E-Mail mit Deinem Reset-Code erhalten. Gib den Code zusammen mit einem neuen Passwort unten ein, um Dein Passwort zu ändern."
   },
   "accountPage": {
     "title": "Konto",
