@@ -84,7 +84,9 @@ export function AccountPage() {
     (files: File[]) => {
       if (files.length === 0) {
         dispatch(
-          sessionActions.updateAvatarFailed(t(...messages.imageTooLargeError)),
+          sessionActions.updateAvatarFailed(
+            new Error(t(...messages.imageTooLargeError)),
+          ),
         );
         return;
       }
