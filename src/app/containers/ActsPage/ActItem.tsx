@@ -23,6 +23,7 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
+import { yellow } from '@material-ui/core/colors';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Close, Person, Replay } from '@material-ui/icons';
 import * as React from 'react';
@@ -90,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1.5, 1),
   },
   totalRatingChip: {
-    backgroundColor: 'goldenrod',
+    backgroundColor: yellow[700],
   },
 }));
 

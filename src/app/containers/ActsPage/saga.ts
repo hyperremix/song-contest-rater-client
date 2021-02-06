@@ -9,6 +9,8 @@ import { actsPageActions } from './slice';
 
 export function* queryActs() {
   try {
+    yield put(actsPageActions.loadActs());
+
     const selectedCompetition = (yield select(
       selectSelectedCompetition,
     )) as Competition;
@@ -36,6 +38,8 @@ export function* queryActs() {
 
 export function* queryRatings() {
   try {
+    yield put(actsPageActions.loadRatings());
+
     const selectedCompetition = (yield select(
       selectSelectedCompetition,
     )) as Competition;

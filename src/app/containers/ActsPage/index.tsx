@@ -4,7 +4,14 @@
  *
  */
 
-import { CircularProgress, Grid, Typography } from '@material-ui/core';
+import {
+  CircularProgress,
+  Grid,
+  IconButton,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
+import { Replay } from '@material-ui/icons';
 import { CompetitionItem } from 'app/components/competition/CompetitionItem';
 import { SimpleSnackbar } from 'app/components/general/SimpleSnackbar/Loadable';
 import * as React from 'react';
@@ -29,11 +36,24 @@ import {
 } from './selectors';
 import { reducer, sliceKey } from './slice';
 
+const useStyles = makeStyles(theme => ({
+  buttonWrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonProgress: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+}));
+
 export function ActsPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: actsPageSaga });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const classes = useStyles();
   const pathParams = useParams<{ id: string }>();
 
   const selectedCompetition = useSelector(selectSelectedCompetition);
@@ -64,6 +84,10 @@ export function ActsPage() {
     dispatch(competitionListPageActions.selectCompetition(pathParams.id));
   });
 
+  const handleRefresh = () => {
+    dispatch(competitionListPageActions.selectCompetition(pathParams.id));
+  };
+
   return (
     <>
       <Helmet>
@@ -78,11 +102,25 @@ export function ActsPage() {
             description={getApiError(t, error)}
           />
         )}
-        {isLoading && <CircularProgress />}
         {!!selectedCompetition && (
           <CompetitionItem competition={selectedCompetition} />
         )}
-        <Typography variant="h2">{t(...messages.actsTitle)}</Typography>
+        <Grid item>
+          <Grid container justify="space-between" alignItems="center">
+            <Typography variant="h2">{t(...messages.actsTitle)}</Typography>
+            <div className={classes.buttonWrapper}>
+              <IconButton color="inherit" onClick={handleRefresh}>
+                <Replay />
+              </IconButton>
+              {isLoading && (
+                <CircularProgress
+                  size={48}
+                  className={classes.buttonProgress}
+                />
+              )}
+            </div>
+          </Grid>
+        </Grid>
         {!!acts?.length &&
           acts.map(act => (
             <ActItem

@@ -20,6 +20,9 @@ const actsPageSlice = createSlice({
   name: 'actsPage',
   initialState,
   reducers: {
+    loadActs(state) {
+      state.loading = true;
+    },
     actsLoaded(state, action: PayloadAction<Act[]>) {
       state.acts = action.payload;
       state.loading = false;
@@ -27,6 +30,9 @@ const actsPageSlice = createSlice({
     actsError(state, action: PayloadAction<Error>) {
       state.error = action.payload;
       state.loading = false;
+    },
+    loadRatings(state) {
+      state.loading = true;
     },
     ratingsLoaded(state, action: PayloadAction<Rating[]>) {
       state.ratings = action.payload;
