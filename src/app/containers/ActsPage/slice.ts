@@ -71,7 +71,7 @@ const actsPageSlice = createSlice({
         state.ratings = [
           ...state.ratings.slice(0, index),
           action.payload,
-          ...state.ratings.slice(index),
+          ...state.ratings.slice(index + 1),
         ];
       } else {
         state.ratings = [...state.ratings, action.payload];
