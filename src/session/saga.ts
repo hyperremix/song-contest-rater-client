@@ -1,4 +1,5 @@
 import Auth from '@aws-amplify/auth';
+import { User } from '@hyperremix/song-contest-rater-model';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { request } from 'utils/request';
@@ -48,7 +49,9 @@ export function* updateAvatar({
         'Content-Type': file.type,
       },
     });
-    yield put(sessionActions.updateAvatarSuccess(URL.createObjectURL(file)));
+
+    const updatedUser = (yield call(request, `/users/${user.id}`)) as User;
+    yield put(sessionActions.updateAvatarSuccess(updatedUser));
   } catch (err) {
     yield put(sessionActions.updateAvatarFailed(err));
   }

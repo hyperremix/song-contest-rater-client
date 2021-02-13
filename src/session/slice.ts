@@ -46,10 +46,10 @@ const sessionSlice = createSlice({
     tryUpdateAvatar(state, _: PayloadAction<UpdateAvatarAction>) {
       state.avatarLoading = true;
     },
-    updateAvatarSuccess(state, action: PayloadAction<string>) {
+    updateAvatarSuccess(state, action: PayloadAction<User>) {
       state.avatarLoading = false;
       state.error = null;
-      state.user!.avatarUrl = action.payload;
+      state.user = action.payload;
     },
     updateAvatarFailed(state, action: PayloadAction<Error>) {
       state.avatarLoading = false;
